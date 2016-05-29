@@ -145,13 +145,16 @@ find_non_num_loop
     brz find_non_num_end
     ;r1 = r1 - 48
     add r1, r1, r0
-    ;
+    ;if r1 < 48 go to end
     brn find_non_num_end
     add r1, r1, #-9
+    ;if r1 > 57 go to end
     brp find_non_num_end
 
+    ;otherwise r6 = r6 + 1
     add r6, r6, #1
     
+    ;repeat
     br find_non_num_loop
 
 find_non_num_end
