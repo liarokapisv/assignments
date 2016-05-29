@@ -92,7 +92,7 @@ find_num_loop
     brn find_num_after_if
     ;r1 = r1 - 9
     add r1, r1, #-9
-    ;else if r1 >= 57 go to end
+    ;else if r1 <= 57 go to end
     brnz find_num_end
 
 find_num_after_if
