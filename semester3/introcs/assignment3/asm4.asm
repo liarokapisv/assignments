@@ -1,11 +1,5 @@
 .ORIG x3000
 
-string .STRINGZ "hello world!"
-exnum1 .FILL #11
-exnum2 .FILL #3
-exnum3 .FILL x000F
-exnum4 .FILL x000A
-
 ;------ example -----
 
 LD R0, exnum1
@@ -111,5 +105,12 @@ LENGTH_END
     LD R1, length_r1
     LD R7, length_r7
     RET
+
+string .STRINGZ "hello world!"
+exnum1 .FILL #11
+exnum2 .FILL #3
+exnum3 .FILL x000F
+exnum4 .FILL x000A
+
 
 .END

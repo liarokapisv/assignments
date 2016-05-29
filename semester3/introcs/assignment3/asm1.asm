@@ -1,7 +1,4 @@
 .ORIG x3000
-
-     NUMBER0 .FILL #4
-     NUMBER1 .FILL #0
      
      LD R0, NUMBER0 
      AND R2, R2, #0 
@@ -22,6 +19,9 @@ Loop ADD R2, R2, #1
      ADD R0, R2, #-1
 
 End  HALT
+     
+     NUMBER0 .FILL #4
+     NUMBER1 .FILL #0
 
 .END
 

@@ -12,12 +12,16 @@
 ;   r1 = r5
 ; }
 
+br prog_start
+
 data .stringz "aasdasd474asdasd4566asd"
-    
+
+prog_start
+
     and r0, r0, #0
     lea r1, data
 
-loop    
+prog_loop    
 
     ;r2 = *r1
     ldr r2, r1, #0
@@ -44,7 +48,7 @@ loop
     ;r1 = r5 
     add r1, r5, #0
     ;repeat
-    br loop
+    br prog_loop
 
 prog_end 
 
@@ -326,3 +330,5 @@ mult_end
    ret
 
 .end
+
+    
