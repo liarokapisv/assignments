@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{\PYGZob{}\PYGZhy{}\PYGZsh{} LANGUAGE BangPatterns \PYGZsh{}\PYGZhy{}\PYGZcb{}}
+
+\PYG{k+kr}{import} \PYG{n+nn}{Control.Monad}
+\PYG{k+kr}{import} \PYG{n+nn}{System.Random}
+
+\PYG{n+nf}{fastExpMod} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer}
+\PYG{n+nf}{fastExpMod} \PYG{n}{b} \PYG{n}{e} \PYG{n}{m} \PYG{o+ow}{=} \PYG{n}{fastExpMod\PYGZsq{}} \PYG{n}{b} \PYG{n}{e} \PYG{l+m+mi}{1}
+  \PYG{k+kr}{where} 
+    \PYG{n}{fastExpMod\PYGZsq{}} \PYG{o}{!}\PYG{n}{b} \PYG{l+m+mi}{0} \PYG{o}{!}\PYG{n}{a} \PYG{o+ow}{=} \PYG{n}{a}
+    \PYG{n}{fastExpMod\PYGZsq{}} \PYG{n}{b} \PYG{n}{e} \PYG{n}{a} 
+      \PYG{o}{|} \PYG{n}{even} \PYG{n}{e} \PYG{o+ow}{=} \PYG{n}{fastExpMod\PYGZsq{}} \PYG{p}{(}\PYG{n}{b\PYGZsq{}}\PYG{o}{\PYGZca{}}\PYG{l+m+mi}{2}\PYG{p}{)} \PYG{p}{(}\PYG{n}{e} \PYG{p}{`}\PYG{n}{div}\PYG{p}{`} \PYG{l+m+mi}{2}\PYG{p}{)} \PYG{n}{a}
+      \PYG{o}{|} \PYG{n}{odd}  \PYG{n}{e} \PYG{o+ow}{=} \PYG{n}{fastExpMod\PYGZsq{}} \PYG{p}{(}\PYG{n}{b\PYGZsq{}}\PYG{o}{\PYGZca{}}\PYG{l+m+mi}{2}\PYG{p}{)} \PYG{p}{((}\PYG{n}{e}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{`}\PYG{n}{div}\PYG{p}{`} \PYG{l+m+mi}{2}\PYG{p}{)} \PYG{p}{(}\PYG{n}{a}\PYG{o}{*}\PYG{n}{b\PYGZsq{}} \PYG{p}{`}\PYG{n}{mod}\PYG{p}{`} \PYG{n}{m}\PYG{p}{)}
+      \PYG{k+kr}{where} \PYG{n}{b\PYGZsq{}} \PYG{o+ow}{=} \PYG{n}{b} \PYG{p}{`}\PYG{n}{mod}\PYG{p}{`} \PYG{n}{m}
+
+\PYG{n+nf}{check} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{IO} \PYG{k+kt}{Bool}
+\PYG{n+nf}{check} \PYG{n}{n} \PYG{o+ow}{=} \PYG{k+kr}{do} 
+  \PYG{n}{alphas} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{replicateM} \PYG{l+m+mi}{40} \PYG{o}{\PYGZdl{}} \PYG{n}{randomRIO} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+  \PYG{n}{return} \PYG{o}{\PYGZdl{}} \PYG{n}{all} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{fastExpMod} \PYG{n}{a} \PYG{p}{(}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{n}{n} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{n}{alphas}
+\end{Verbatim}
