@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.5.23)  13 JUN 2016 00:56
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.5.23)  13 JUN 2016 00:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -926,34 +926,33 @@ Package pdftex.def Info: NTUA.png used on input line 11.
  [2] [3] [4]
 [5] [6] [7] [8] [9] [10] [11] [12] (./assignment.aux) ) 
 Here is how much of TeX's memory you used:
- 4972 strings out of 494910
- 69021 string characters out of 6178755
+ 4971 strings out of 494910
+ 69005 string characters out of 6178755
  141730 words of memory out of 5000000
- 8079 multiletter control sequences out of 15000+600000
- 18253 words of font info for 56 fonts, out of 8000000 for 9000
+ 8078 multiletter control sequences out of 15000+600000
+ 17955 words of font info for 55 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
- 38i,13n,45p,489b,368s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,13n,45p,489b,339s stack positions out of 5000i,500n,10000p,200000b,80000s
 </home/veritas/texmf/fon
 ts/type1/public/amsfonts/cm/cmex10.pfb></home/veritas/texmf/fonts/type1/public/
 amsfonts/cm/cmmi10.pfb></home/veritas/texmf/fonts/type1/public/amsfonts/cm/cmmi
 5.pfb></home/veritas/texmf/fonts/type1/public/amsfonts/cm/cmmi7.pfb></home/veri
 tas/texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/veritas/texmf/fonts/t
-ype1/public/amsfonts/cm/cmr12.pfb></home/veritas/texmf/fonts/type1/public/amsfo
-nts/cm/cmr5.pfb></home/veritas/texmf/fonts/type1/public/amsfonts/cm/cmr7.pfb></
-home/veritas/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/veritas/tex
-mf/fonts/type1/public/amsfonts/cm/cmsy5.pfb></home/veritas/texmf/fonts/type1/pu
-blic/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cb
-fonts/grmi1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cbfonts/gr
-mn1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cbfonts/grmn1200.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/cbfonts/grmn1440.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/cbfonts/grmn1728.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/cbfonts/grxn1000.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/cbfonts/grxn1200.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/rsfs/rsfs10.pfb>
-Output written on assignment.pdf (13 pages, 388163 bytes).
+ype1/public/amsfonts/cm/cmr5.pfb></home/veritas/texmf/fonts/type1/public/amsfon
+ts/cm/cmr7.pfb></home/veritas/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
+/home/veritas/texmf/fonts/type1/public/amsfonts/cm/cmsy5.pfb></home/veritas/tex
+mf/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/cbfonts/grmi1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/cbfonts/grmn1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/c
+bfonts/grmn1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cbfonts/g
+rmn1440.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cbfonts/grmn1728.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cbfonts/grxn1000.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/cbfonts/grxn1200.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb>
+Output written on assignment.pdf (13 pages, 380461 bytes).
 PDF statistics:
- 126 PDF objects out of 1000 (max. 8388607)
- 89 compressed objects within 1 object stream
+ 122 PDF objects out of 1000 (max. 8388607)
+ 86 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
