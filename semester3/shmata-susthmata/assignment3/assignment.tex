@@ -1,0 +1,566 @@
+\documentclass{assignment}
+\usepackage{mathrsfs}
+\usepackage{array}
+\usepackage{parskip}
+
+\newcommand{\dropsign}[1]{\smash{\llap{\raisebox{-.5\normalbaselineskip}{$#1$\hspace{2\arraycolsep}}}}}%
+\newcommand{\longdivline}{\cline{1-1} \\[\dimexpr-\normalbaselineskip+\jot]}
+
+\begin{document}
+
+\createtitle{Σήματα και Συστήματα}{3η \& 4η σειρά ασκήσεων}
+
+\problem{Άσκηση 1}
+
+Υπολογίστε τον αντίστροφο μετασχηματισμό $\mathscr{Z}$ και παρουσιάστε 
+την περιοχή σύγκλισης (\en{ROC}) του μετασχηματισμού σε κάθε περίπτωση.
+
+\begin{questions}
+
+\question{1} $x_1[n] = \frac{u[n-1]}{n}$
+
+\question{2} $x_2[n] = nu[n] +(2N-2n)u[n - (N+1)] - (2N - n)u[n-(2N+1)]$\\
+          χρησιμοποιώντας το $z[n]=u[n]-u[n-N]$
+
+%\question{3} $x_3[n] = 7\frac{1}{3}^n \cos(\frac{2\pi n}{6} + \frac{\pi}{4})$
+
+\question{4} $x_4[n] = |n|2^{-|n|}$
+
+\question{5} $x_5[n] = n(n+1)(n+2)3^{-n}u[n]$
+
+\end{questions}
+Υπολογίστε τον αντίστροφο μετασχηματισμός $\mathscr{Z}$ των:
+
+\begin{questions}
+
+\question{1} $\displaystyle W_1(z) = \frac{1-2z^{-1}}{z^{-1}-2}, |z| > \frac{1}{2}$ \\
+             {\itshape Μέθοδος: Ολοκληρωτικά υπόλοιπα}
+\question{2} $\displaystyle  X_1(z) = \sin(z)$, \en{ROC} περιέχει $\{|z|=1\}, X_2(z)=e^z+e^{\frac{1}{z}}, z \neq 0, X_3(z)=\ln(1-2z),|z| < \frac{1}{2}$\\
+             {\itshape Μέθοδος: Δυναμοσειρά}
+\question{3} $\displaystyle Y_1(z) = \frac{1}{(1-2z^{-1})(1-3z^{-1})(1+\frac{1}{2}z^{-1})}$, όπου $y[n]$ ευσταθές σήμα.\\
+             $\displaystyle Y_2(z) = \frac{2z^4}{(-2+z)(-1+z)^2(-1+2z)}, |z| > 2$\\
+             {\itshape Μέθοδος: Ανάλυση κλασμάτων}
+\question{4} $\displaystyle Z_1(z) = \frac{1}{1-\frac{1}{3}z^{-1}}, |z| < \frac{1}{3}, Z_2(z) = \frac{1}{1-\frac{1}{3}z^{-1}}, |z| > \frac{1}{3}$ \\
+             {\itshape Μέθοδος: Επαναλαμβανόμενη διαίρεση}
+
+\end{questions}
+
+\solution
+
+\subsubsection*{Μετασχηματισμοί $\mathscr{Z}$} 
+
+\begin{answers}
+
+\answer
+Γνωρίζουμε πως,
+\begin{equation*}
+x_1[n] = \frac{u[n-1]}{n}\\
+\end{equation*}
+
+Επίσης έχουμε,
+\begin{gather*}
+\frac{d\ln(1-x)}{dx} = -\frac{1}{1-x}\\
+\frac{d\ln(1-x)}{dx} = -\sum_{k=0}^{\infty} x^k,\quad|x| < 1\\
+\ln(1-x) = -\int\sum_{k=0}^{\infty} x^k \,dx + C ,\quad |x| < 1\\
+\ln(1-x) = -\sum_{k=0}^{\infty} \frac{x^{k+1}}{k+1} \, dx, \quad \text{($C = 0$ για $x = 0$)}
+\end{gather*}
+
+Επομένως,
+\begin{align*}
+X_1(z) &= \mathscr{Z}\bigg\{x_1[n]\bigg\} \\
+       &= \sum_{k=1}^{\infty}\frac{z^{-k}}{k} \\
+       &= \sum_{k=0}^{\infty}\frac{z^{-k-1}}{k+1} \\
+       &= \sum_{k=0}^{\infty}\frac{\left(\frac{1}{z}\right)^{k+1}}{k+1}\\
+       &= ln\left(1-\frac{1}{z}\right),\quad \text{\en{ROC: }}\left|\frac{1}{z}\right| < 1 \Rightarrow |z| > 1
+\end{align*}
+
+
+\answer
+Γνωρίζουμε πως, 
+\begin{align*} x_2[n] &= n u[n] + 2Nu[n-(N+1)] - 2 n u[n-(N+1)] - 2 N u[n-(2N+1)] + n u[n-(2N+1)] \\
+                        &= n u[n] + 2Nu[n-(N+1)] - 2 (n + (N+1) - (N+1)) u[n-(N+1)] \\ 
+                        &\quad - 2Nu[n-(2N+1)] + (n+(2N+1)-(2N+1))u[n-(2N+1)] \\
+                        &= n u[n] + 2Nu[n-(N+1)] - 2(n-(N+1))u[n-(N+1)] - 2(N+1)u[n-(N+1)] \\
+                        &\quad - 2Nu[n-(2N+1)] + (n-(2N+1))u[n-(2N+1)] + (2N+1)u[n-(2N+1)] \\
+                        &= n u[n] - 2u[n-(N+1)] - 2(n-(N+1))u[n-(N+1)] \\
+                        &\quad + (n-(2N+1))u[n-(2N+1)] + u[n-(2N+1)]
+\end{align*}
+
+Επίσης έχουμε, 
+\begin{gather*}
+\mathscr{Z}\bigg\{u[n]\bigg\} = \frac{z}{z-1},\quad \text{\en{ROC: }} |z| > 1 \\
+\mathscr{Z}\bigg\{nu[n]\bigg\} = \frac{z}{(z-1)^2} ,\quad \text{\en{ROC: }} |z| > 1\\
+\mathscr{Z}\bigg\{u[n-k]\bigg\} = z^{-k}\frac{z}{z-1},\quad \text{\en{ROC: }} |z| > 1 \\
+\mathscr{Z}\bigg\{(n-k)u[n-k]\bigg\} = z^{-k}\frac{z}{(z-1)^2},\quad \text{\en{ROC: }} |z| > 1
+\end{gather*}
+
+Επομένως,
+\begin{align*} 
+\mathscr{Z}\bigg\{x_2[n]\bigg\} &=  \mathscr{Z}\bigg\{nu[n]\bigg\} -2\mathscr{Z}\bigg\{u[n-(N+1)]\bigg\} 
+                                                   -2\mathscr{Z}\bigg\{(n-(N+1))u[n-(N+1)]\bigg\} \\
+       &\quad + \mathscr{Z}\bigg\{(n-(2N+1))u[n-(2N+1)]\bigg\} + \mathscr{Z}\bigg\{u[n-(2N+1)]\bigg\}\\
+       X_2(z) &= \frac{z}{(z-1)^2} -2 z^{-(N+1)}\frac{z}{z-1} -2z^{-(N+1)}\frac{z}{(z-1)^2} 
+              + z^{-(2N+1)}\frac{z}{(z-1)^2}+ z^{-(2N+1)}\frac{z}{z-1} ,\quad \text{\en{ROC: }} |z| > 1
+\end{align*}
+
+
+%\answer
+%Γνωρίζουμε πως, 
+%\begin{align*}
+%x_3[n] &= 7\left(\frac{1}{3}\right)^n\cos\left(\frac{2\pi n}{6} + \frac{\pi}{4}\right) \\
+%       &= \frac{7}{2}\left(\frac{1}{3}\right)^n\left(e^{j\left(\frac{2\pi n}{6} + \frac{\pi}{4}\right)} 
+%                                                   + e^{-j\left(\frac{2\pi n}{6} + \frac{\pi}{4}\right)}\right)
+%\end{align*}
+
+\answer
+
+Γνωρίζουμε πως,
+\begin{gather*} x_3[n] = |n|2^{-|n|} = n\left(\frac{1}{2}\right)^{n}u[n] - n2^nu[-n-1]\end{gather*}
+
+Επίσης έχουμε, 
+\begin{gather*} 
+\mathscr{Z}\bigg\{n\left(\frac{1}{2}\right)^nu[n]\bigg\} = 
+  \frac{1}{2}\frac{z}{(z-\frac{1}{2})^2}, \quad\text{\en{ROC:} }|z| > \frac{1}{2} \\
+\mathscr{Z}\bigg\{n2^nu[n]\bigg\} = 2\frac{z}{(z-2)^2}, \quad\text{\en{ROC:} }|z| < 2
+\end{gather*}
+
+Επομένως,
+\begin{gather*}
+X_3(z) = \frac{1}{2}\frac{z}{(z-\frac{1}{2})^2} + 2\frac{z}{(z-2)^2}, \quad\text{\en{ROC: }}\frac{1}{2} < |z| < 2 
+\end{gather*}
+
+\answer
+Γνωρίζουμε πως,
+\begin{equation*}x_5[n] = n(n+1)(n+2)3^{-n}u[n]\end{equation*}
+
+Επίσης έχουμε,
+\begin{gather*}
+\mathscr{Z}\bigg\{3^{-n}u[n]\bigg\} = \frac{z}{z-\frac{1}{3}}, \quad\text{\en{ROC:} } |z| > \frac{1}{3} \\
+\sum_{n=-\infty}^{\infty} 3^{-n}u[n]z^{-n} = \frac{z}{z-\frac{1}{3}} \\
+-\sum_{n=-\infty}^{\infty} n3^{-n}u[n]z^{-n-1} = -\frac{3}{(1-3z)^2}, \quad\text{(Από παραγώγηση)} \\
+\sum_{n=-\infty}^{\infty} n(n+1)3^{-n}u[n]z^{-n-2} = \frac{18}{(3z-1)^3}, \quad\text{(Από παραγώγηση)} \\
+-\sum_{n=-\infty}^{\infty} n(n+1)(n+2)3^{-n}u[n]z^{-n-3} = -\frac{162}{(3z-1)^4}, \quad\text{(Από παραγώγηση)} \\
+\sum_{n=-\infty}^{\infty} n(n+1)(n+2)3^{-n}u[n]z^{-n} = z^3\frac{162}{(3z-1)^4}, \quad\text{\en{ROC:} } |z| > \frac{1}{3} 
+\end{gather*}
+
+Επομένως,
+\begin{equation*}
+X_5(z) = z^3\frac{162}{(3z-1)^4}, \quad\text{\en{ROC:} } |z| > \frac{1}{3}
+\end{equation*}
+
+\end{answers}
+
+\subsubsection*{Αντίστροφοι μετασχηματισμοί $\mathscr{Z}$}
+
+\begin{answers}
+
+\answer
+Γνωρίζουμε πως, \begin{equation*}W_1(z) = \frac{1-2z^{-1}}{z^{-1}-2} = \frac{z-2}{1-2z}, \quad |z| > \frac{1}{2}\end{equation*}
+
+
+\begin{equation*}
+w_1[n] = \frac{1}{2\pi j}\oint_C W_1(z)z^{n-1}\,dz = \frac{1}{2\pi j}\oint_C \frac{z-2}{1-2z}z^{n-1}\,dz
+\end{equation*}
+
+\newpage
+Παίρνω περιπτώσεις:
+
+$n > 0$: Υπάρχει μόνο ο πόλος $\rho_1 = \frac{1}{2}$.
+Η καμπύλη $C$ βρίσκεται στην περιοχή σύγκλισης άρα περικλύει τον πόλο.
+Επομένως, 
+\begin{align*}
+w_1[n] &= Res\left[\frac{z-2}{1-2z}z^{n-1}, \frac{1}{2}\right] \\
+       &= \lim_{z \to \frac{1}{2}}\left(z-\frac{1}{2}\right)\frac{z-2}{1-2z}z^{n-1} \\
+       &= \lim_{z \to \frac{1}{2}}-\frac{1}{2}(z-2)z^{n-1} \\
+       &= \frac{3}{2}\left(\frac{1}{2}\right)^n
+\end{align*}
+
+$n = 0$: Υπάρχουν οι πόλοι $\rho_1 = \frac{1}{2}$ και $\rho_2 = 0$.
+Επομένως,
+\begin{align*}
+w_1[n] &= Res\left[\frac{1}{z}\cdot\frac{z-2}{1-2z}, \frac{1}{2}\right] + 
+          Res\left[\frac{1}{z}\cdot\frac{z-2}{1-2z}, 0\right] \\
+       &= \lim_{z \to \frac{1}{2}}\left(z-\frac{1}{2}\right)\frac{1}{z}\cdot\frac{z-2}{1-2z} +
+          \lim_{z \to 0}\cdot\frac{z-2}{1-2z} \\
+       &= \frac{3}{2} - 2 \\
+       &= -\frac{1}{4}
+\end{align*}
+
+$n < 0$: Εφαρμόζουμε αλλαγή μεταβλητής $p = \frac{1}{z} \Rightarrow dp = -\frac{1}{z^2}dz,\quad |p| < 2$. Τότε,
+\begin{equation*}
+w_1[n] = \frac{1}{2\pi j}\oint_{C'}\frac{2p - 1}{p-2} p^{-n-1} \, dp
+\end{equation*}
+
+Υπάρχει μοναδικός πόλος $\rho_1 = 2$
+Επίσης έχουμε η $C'$ εμπεριέχεται στην περιοχή σύγκλισης $|p| < 2$ και επομένως δεν περικλύει κανένα πόλο.
+Επομένως,
+\begin{equation*}
+w_1[n] = 0
+\end{equation*}
+
+Τελικά:
+
+\begin{equation*}
+w_1[n] = \begin{cases}
+    \frac{3}{2}\left(\frac{1}{2}\right)^n & n > 0 \\
+    -\frac{1}{4} & n = 0 \\
+    0 & n < 0
+\end{cases}
+\end{equation*}
+
+\answer
+Γνωρίζουμε πως,
+\begin{align*}
+X_3(z) &= \ln(1-x) \\
+       &= -\sum_{k=1}^{\infty} \frac{(2z)^n}{n} \\
+       &= \sum_{k=-\infty}^{\infty} -\frac{(2z)^n}{n} u[n-1] \\
+       &= \sum_{k=-\infty}^{\infty} \frac{2^{-n}}{n} u[-n-1] z^{-n}
+\end{align*}
+
+Επίσης έχουμε,
+\begin{equation*}
+X_3(z) = \sum_{k=-\infty}^{\infty} x_3[n] z^{-n}
+\end{equation*}
+
+Επομένως,
+\begin{equation*}
+x_3[n] = \frac{2^{-n}}{n}u[-n-1]
+\end{equation*}
+
+\answer
+
+Γνωρίζουμε πως,
+\begin{gather*}
+Y_1(z) = \frac{1}{(1-2z^{-1})(1-3z^{-1})(1+\frac{1}{2}z^{-1})} \\
+\frac{Y_1(z)}{z} = \frac{z^2}{(z-2)(z-3)(z+\frac{1}{2})} \\
+\frac{Y_1(z)}{z} = -\frac{8}{5}\cdot\frac{1}{z-2} + \frac{1}{35}\cdot\frac{1}{z+\frac{1}{2}} + \frac{18}{7}\cdot\frac{1}{z-3} \\
+Y_1(z) = -\frac{8}{5}\cdot\frac{z}{z-2} + \frac{1}{35}\cdot\frac{z}{z+\frac{1}{2}} + \frac{18}{7}\cdot\frac{z}{z-3} \\
+\end{gather*}
+
+Επομένως,
+\begin{align*}
+y_1[n] &= \mathscr{Z}^{-1}\bigg\{Y_1(z)\bigg\}\\
+       &= -\frac{8}{5}\mathscr{Z}^{-1}\bigg\{\frac{z}{z-2}\bigg\} 
+          +\frac{1}{35}\mathscr{Z}^{-1}\bigg\{\frac{z}{z+\frac{1}{2}}\bigg\} 
+          +\frac{18}{7}\mathscr{Z}^{-1}\bigg\{\frac{z}{z-3}\bigg\} \\
+       &= -\frac{8}{5}2^n + \frac{1}{35}\left(-\frac{1}{2}\right)^n +\frac{18}{7}3^n
+\end{align*}
+
+Γνωρίζουμε πως,
+\begin{gather*}
+Y_2(z) = \frac{2z^4}{(-2+z)(-1+z)^2(-1+2z)} \\
+\frac{Y_2(z)}{z} = \frac{2z^3}{(-2+z)(-1+z)^2(-1+2z)} \\
+\frac{Y_2(z)}{z} = -4 \frac{1}{z-1} - \frac{2}{6}\cdot\frac{1}{z-\frac{1}{2}} -2 \frac{1}{(z-1)^2} + \frac{16}{3}\cdot\frac{1}{z-2}\\
+Y_2(z) = -4 \frac{z}{z-1} - \frac{2}{6}\cdot\frac{z}{z-\frac{1}{2}} -2 \frac{z}{(z-1)^2} + \frac{16}{3}\cdot\frac{z}{z-2}
+\end{gather*}
+
+Επομένως,
+\begin{align*}
+y_2[n] &= \mathscr{Z}^{-1}\bigg\{Y_2(z)\bigg\} \\
+       &= -4\mathscr{Z}^{-1}\bigg\{\frac{z}{z-1}\bigg\} 
+          -\frac{2}{6}\mathscr{Z}^{-1}\bigg\{\frac{z}{z-\frac{1}{2}}\bigg\}
+          -2\mathscr{Z}^{-1}\bigg\{\frac{z}{(z-1)^2}\bigg\}
+          +\frac{16}{3}\mathscr{Z}^{-1}\bigg\{\frac{z}{z-2}\bigg\} \\
+       &= -4u[n] - \frac{2}{6}\left(\frac{1}{2}\right)^n - 2n + \frac{16}{3}2^n
+\end{align*}
+
+\answer
+Γνωρίζουμε πως,
+\begin{equation*}
+Z_1(z) = \frac{1}{1-\frac{1}{3}z^{-1}}, |z| < \frac{1}{3}
+\end{equation*}
+
+Επειδή $|z| < \frac{1}{3}$ εκτελούμε επαναλαμβανόμενη διαίρεση,
+
+\begin{equation*}
+  \setlength\extrarowheight{2pt}
+  \begin{array}{r|l}
+    \dropsign{-} 1\hphantom{{}+{}0z{}+{}0z^2{}+{}00z^3}& -\frac{1}{3}z^{-1} + 1 \\[2pt] \cline{2-2}
+    1 - 3z\hphantom{{}+{}0z^2{}+{}00z^3}& -3z - 9z^2 - 27z^3 - \dots \\ \longdivline
+    \dropsign{-} 3z\hphantom{{}-{}0z^2{}+{}00z^3}&\\
+                 3z - 9z^2\hphantom{{}+{}00z^3}&\\ \longdivline
+    \dropsign{-} 9z^2\hphantom{{}-{}00z^3}&\\
+                 9z^2 + 27z^3&\\ \longdivline
+                        \dots&
+  \end{array}
+\end{equation*}
+
+Παρατηρούμε πως,
+\begin{align*}
+Z_1(z) &= \sum_{n=1}^{\infty} -3^nz^n \\
+       &= \sum_{n=-\infty}^{\infty} -3^nz^nu[n-1] \\
+       &= \sum_{n=-\infty}^{\infty} -\left(\frac{1}{3}\right)^n u[-n-1] z^{-n}
+\end{align*}
+
+Επομένως,
+\begin{equation*}
+z_1[n] = -\left(\frac{1}{3}\right)^nu[-n-1]
+\end{equation*}
+
+Γνωρίζουμε πως,
+\begin{equation*}
+Z_2(z) = \frac{1}{1-\frac{1}{3}z^{-1}}, |z| > \frac{1}{3}
+\end{equation*}
+
+Επειδή $|z| > \frac{1}{3}$ εκτελούμε επαναλαμβανόμενη διαίρεση,
+
+\begin{equation*}
+  \setlength\extrarowheight{2pt}
+  \begin{array}{r|l}
+    \dropsign{-} 1\hphantom{{}+{}\frac{0}{1}z^{-1}{}+{}\frac{0}{1}z^{-2}{}+{}\frac{0}{01}z^{-3}}& 1 -\frac{1}{3}z^{-1} \\[2pt] \cline{2-2}
+    1 - \frac{1}{3}z^{-1}\hphantom{{}+{}\frac{0}{1}z^{-2}{}+{}\frac{0}{01}z^{-3}}& 1 + \frac{1}{3}z^{-1} + \frac{1}{9}z^{-2}  + \dots \\[2pt] \longdivline
+    \dropsign{-} \frac{1}{3}z^{-1}\hphantom{{}-{}\frac{0}{1}z^{-2}{}+{}\frac{0}{01}z^{-3}}&\\[2pt]
+                 \frac{1}{3}z^{-1} - \frac{1}{9}z^{-2}\hphantom{{}+{}\frac{0}{01}z^{-3}}&\\[2pt] \longdivline
+    \dropsign{-} \frac{1}{9}z^{-2}\hphantom{{}-{}\frac{0}{01}z^{-3}}&\\[2pt]
+                 \frac{1}{9}z^{-2} - \frac{1}{27}z^{-3}&\\[2pt] \longdivline
+                        \dots&
+  \end{array}
+\end{equation*}
+
+Παρατηρούμε πως,
+\begin{align*}
+Z_2(z) &= \sum_{n=0}^{\infty} \left(\frac{1}{3}\right)^nz^{-n} \\
+       &= \sum_{n=-\infty}^{\infty} \left(\frac{1}{3}\right)^nu[n]z^{-n}
+\end{align*}
+
+Επομένως,
+\begin{equation*}
+z_2[n] = \left(\frac{1}{3}\right)^nu[n]
+\end{equation*}
+
+\end{answers}
+
+\problem{Άσκηση 2}
+
+\begin{questions}
+
+\question{1} 
+Αποδείξτε ότι αν ο μετασχηματισμός (\en{Laplace/Fourier}) της κρουστικής ενός συστήματος είναι μία
+ρητή συνάρτηση δύο πολυωνύμων, τότε το σύστημα περιγράφεται από μία διαφορική εξίσωση.
+
+\question{2} 
+Αν το σύστημα έχει απόκριση $H(s) = \frac{A}{s+c}$, αποδείξτε ότι η διαφορική εξίσωση είναι $\frac{dy(t)}{dt} + cy(t) = Ax(t)$
+
+\question{3}
+Για να προσεγγίσουμε την παράγωγο $\frac{dy(t)}{dt}$, χρησιμοποιούμε τον ορισμό 
+$\frac{dy(t)}{dt} = \lim_{T\to 0}\frac{y(t) - y(t-T)}{T} \approx \frac{y(t) - y(t-T)}{T}$, για $T$ πολύ μικρός αριθμός. 
+Εκτιμήστε προσεγγιστικά την μορφή της διαφορικής εξίσωσης για $t = nT_s$, όπου $T_s$ πολύ μικρός αριθμός.
+
+\question{4}
+Για $n[n] = \equiv x(nT_s)$, δώστε την εξίσωση διαφορών που προκύπτει από την προσέγγιση του (3) και υπολογίστε την $H(z)$.
+
+\question{5}
+Δείξτε ότι $H(z) = \left.H(s)\right|_{s=\frac{10z^{-1}}{T}}$, υπάρχει δηλαδή διγραμμικός μετασχηματισμός μεταξύ
+\en{Laplace} \& $\mathscr{Z}$. Σε ποιο πεδίο του $\mathscr{Z}$ αντιστοιχείται η περιοχή $Real(s) < 0$ ? Εξαρτάται η
+ευστάθεια του διακριτοποιημένου συστήματος από το $T$ αν το αναλογικό σύστημα είναι ευσταθές?
+
+\end{questions}
+
+\solution
+
+\begin{answers}
+
+\answer
+Γνωρίζουμε πως,
+\begin{gather*}
+\mathscr{F}\{h(t)\} = H(\omega) = \frac{Y(\omega)}{X(\omega)} = \frac{P(\omega)}{Q(\omega)} \\
+\frac{Y(\omega)}{X(\omega)} =  \frac{a_0 + a_1\omega + a_2\omega^2 + \dots + a_n\omega^n}{
+                                     b_0 + b_1\omega + b_2\omega^2 + \dots + b_m\omega^m} \\
+\sum_{k=0}^{m} Y(\omega)b_k\omega^k = \sum_{k=0}^{n}X(\omega)a_k\omega^k \stepcounter{equation} \tag{\theequation} \label{eqn:diff}
+\end{gather*}
+
+Εφαρμόζοντας τον αντίστροφο μετασχηματισμό \en{Fourier} στην (\ref{eqn:diff}) έχουμε,
+
+\begin{gather*}
+\mathscr{F}^{-1}\big\{\sum_{k=0}^{m} Y(\omega)b_k\omega^k \bigg\} = \mathscr{F}^{-1}\bigg\{\sum_{k=0}^{n}X(\omega)a_k\omega^k \bigg\} \\
+\sum_{k=0}^{m}\frac{b_k}{j^k}\frac{d^ky(t)}{dt^k} = \sum_{k=0}^{n}\frac{a_k}{j^k}\frac{d^kx(t)}{dt^k} 
+\end{gather*}
+
+Αντίστοιχα, για τον αντίστροφο μετασχηματισμό \en{Laplace} έχουμε,
+
+\begin{gather*}
+\mathscr{L}^{-1}\big\{\sum_{k=0}^{m'} Y(s)b_ks^k \bigg\} = \mathscr{L}^{-1}\bigg\{\sum_{k=0}^{n'}X(s)a_ks^k \bigg\} \\
+\sum_{k=0}^{m'}b_k\frac{d^{k}y(t)}{dt^{k}} = \sum_{k=0}^{n'}a_k\frac{d^{k}x(t)}{dt^k} 
+\end{gather*}
+
+Και στις δύο περιπτώσεις το σύστημα μας περιγράφεται από μία διαφορική εξίσωση.
+
+
+\answer
+Έχουμε,
+\begin{gather*}
+H(s) = \frac{A}{s+c} \\
+\frac{Y(s)}{X(s)} = \frac{A}{s+c} \\
+sY(s) + cY(s) = AX(s) \\
+\mathscr{L}^{-1}\bigg\{sY(s) + cY(s)\bigg\} = \mathscr{L}^{-1}\bigg\{AX(s)\bigg\}\\
+\frac{dy(t)}{dt} + cy(t) = Ax(t)
+\end{gather*}
+
+\answer
+Έχουμε,
+\begin{gather*}
+\frac{dy(t)}{dt} + cy(t) = Ax(t) \\
+\frac{y(t) - y(t-T)}{T} + cy(t) = Ax(t) \quad \text{(προσεγγιστικά)}\\
+y(t) - y(t-T) + cTy(t) = ATx(t) \\
+y(nTs) - y(nTs - T) + cTy(nTs) = ATx(nTs) \quad \text{ για } t = nTs\\
+y(nTs) - y(Ts(n-1)) + cTy(nTs) = ATx(nTs) \quad \text{ για } T \approx nTs
+\end{gather*}
+
+\answer
+
+Έχοντας $x[n] = x(nTs)$ και $y[n] = y(nTs)$, τότε σύμφωνα με την (3):
+
+\begin{equation*}
+y[n] - y[n-1] + cTy[n] = ATx[n]
+\end{equation*}
+
+Εφαρμόζοντας αμφίπλευρο μετασχηματισμό $\mathscr{Z}$,
+
+\begin{gather*}
+\mathscr{Z}\bigg\{y[n] - y[n-1] + cTy[n]\bigg\} = AT\mathscr{Z}\bigg\{x[n]\bigg\} \\
+(1-z^{-1})Y(z) + cTY(z) = ATX(z)\\
+H(z) = \frac{Y(z)}{X(z)} = \frac{AT}{1-z^{-1}+cT} 
+\end{gather*}
+
+\answer
+Γνωρίζουμε πως,
+
+\begin{equation*}
+H(s) = \frac{A}{s+c}
+\end{equation*}
+
+Επομένως, 
+\begin{equation*}
+\left.H(s)\right|_{s=\frac{1-z^{-1}}{T}} = \frac{A}{\frac{1-z^{-1}}{T} + c} = \frac{AT}{1-z^{-1}+cT} = H(z)
+\end{equation*}
+
+Και άρα υπάρχει διγραμμικός μετασχηματισμός μεταξύ $\mathscr{Z}$ και $\mathscr{L}$
+
+\end{answers}
+
+\problem{Άσκηση 3}
+
+Έστω σύστημα $\Sigma_1$ Γ.Χ.Α αιτιατό στο οποίο δίνουμε είσοδο:
+\begin{equation}
+x[n]=-\frac{1}{3}(\frac{1}{2})^nu[n]-\frac{4}{3}2^nu[-n-1]
+\end{equation}
+Ο μετασχηματισμός $\mathscr{Z}$ της εξόδου είναι:
+\begin{equation}Y(z) = \frac{1+z^{-1}}{(1-2z^{-1})(1-z^{-1})(1+\frac{1}{2}z^{-1})}\end{equation}
+
+\begin{questions}
+
+\question{1} Υπολογίστε τον $X(z)$ και βρείτε την \en{ROC} του μετασχηματισμού.
+\question{2} Υπολογίστε την \en{ROC} στο $Y(z)$. Είναι το σύστημα ευσταθές?
+\question{3} Υπολογίστε την απόκριση του $\Sigma_1$ σε συχνότητα/χρόνο $H(z)$, $h[n]$.
+\question{4} Ποια είναι η εξίσωση διαφορών που ορίζει το σύστημα?
+\question{5} Αντίστροφο καλείται το $\Sigma_2$, για το οποίο ισχύει ότι $\Sigma_2[\Sigma_1[x(t)]] = x(t)$. 
+Υπολογίστε την απόκριση συχνότητας και την κρουστική απόκριση $G(z),g[n]$ του αντίστροφου συστήματος. Πριν τον 
+υπολογισμό του $g[n]$, υπολογίστε το $g[0]$ χρησιμοποιώντας το $G(z)$. Επιβεβαιώστε το τελικό αποτέλεσμα.
+\question{6} Έστω ότι συνδέουμε σειριακά το $\Sigma_1$ με σύστημα $\Sigma_3$ : $M(z) = \frac{1-z^{-1}}{1+z^{-1}}$. 
+Για το νέο σύστημα $\Sigma_4$, υπολογίστε την απόκριση συχνότητας $F(z)$, την συχνότητα $\Omega$ όπου μεγιστοποιείται 
+το πλάτος της απόκρισης. Το σύστημα είναι βαθυπερατό ή υψιπερατό?
+\question{7} Υπολογίστε το \en{DFT} του $r[n] = (f[n] - \frac{1}{4}f[n-2])$.
+
+\end{questions}
+
+\solution
+
+\begin{answers}
+
+\answer 
+Γνωρίζουμε ότι,
+
+\begin{gather*} 
+\mathscr{Z}\bigg\{\left(\frac{1}{2}\right)^{n}u[n]\bigg\} = \frac{1}{1-\frac{1}{2}z^{-1}}, \quad \text{\en{ROC: }}|z| > \frac{1}{2} \\
+\mathscr{Z}\bigg\{-2^nu[-n-1]\bigg\} = \frac{1}{1-2z^{-1}}, \quad \text{\en{ROC: }}|z| < 2
+\end{gather*}
+
+Επομένως,
+
+\begin{align*}
+X(z) &= -\frac{1}{3}\mathscr{Z}\bigg\{\left(\frac{1}{2}\right)^nu[n]\bigg\} + \frac{4}{3}\mathscr{Z}\bigg\{-2^nu[-n-1]\bigg\}
+     &= -\frac{1}{3}\cdot\frac{1}{1-\frac{1}{2}z^{-1}} + \frac{4}{3}\cdot\frac{1}{1-2z^{-1}}, \quad \text{\en{ROC: }} \frac{1}{2} < |z| < 2
+\end{align*}
+
+\answer
+Γνωρίζουμε ότι,
+
+\begin{gather*} 
+X(z) = \frac{z^2}{\left(z-\frac{1}{2}\right)(z-2)} \\
+Y(z) = \frac{z^2(z+1)}{(z-2)(z-1)\left(z+\frac{1}{2}\right)}
+\end{gather*}
+
+Άρα,
+\begin{gather*}
+H(z) = \frac{Y(z)}{X(z)} \\
+H(z) = \frac{\left(z-\frac{1}{2}\right)(z+1)}{\left(z+\frac{1}{2}\right)(z-1)}
+\end{gather*}
+
+Και επειδή το σύστημα είναι αιτιατό, $|z| > r$ αφού πρέπει $z \to \infty$. Εξαιτίας των πόλων έχουμε $|z| > 1$.
+Τελικά \en{ROC: } $1 < |z| < 2$ και το σύστημα είναι ευσταθές αφού ο μοναδιαίος κύκλος αποτελεί όριο του πεδίου σύγκλισης.
+
+
+\answer
+
+Γνωρίζουμε πως,
+\begin{align*}
+H(z) &= \frac{\left(z - \frac{1}{2}\right)(z+1)}{\left(z+\frac{1}{2}\right)(z-1)} \\
+     &= \frac{1}{3}\cdot\frac{z}{z+\frac{1}{2}}+\frac{2}{3}\cdot\frac{z}{z-1} + \frac{1}{2}\cdot\frac{1}{z+\frac{1}{2}}
+\end{align*}
+
+
+Επομένως,
+
+\begin{equation*}
+h[n] = \mathscr{Z}^{-1} \bigg\{ H(z)\bigg\} = \frac{1}{3}\left(-\frac{1}{2}\right)^n u[n] + \frac{2}{3}u[n] -\left(-\frac{1}{2}\right)^n u[n-1]
+\end{equation*}
+
+
+\answer
+
+Έχουμε,
+
+\begin{gather*}
+H(z) = \frac{Y(z)}{X(z)} \\
+H(z) = \frac{\left(z-\frac{1}{2}\right)(z+1)}{\left(z+\frac{1}{2}\right)(z-1)} \\
+\left(z-\frac{1}{2}\right)(z+1)X(z) = \left(z+\frac{1}{2}\right)(z-1)Y(z) \\
+X(z) + \frac{1}{2}X(z)z^{-1} - \frac{1}{2}z^{-2}X(z) = Y(z) - \frac{1}{2}z^{-1}Y(z) - \frac{1}{2}z^{-2}Y(z)\\
+\mathscr{Z}^{-1}\bigg\{X(z) + \frac{1}{2}X(z)z^{-1} - \frac{1}{2}z^{-2}X(z)\bigg\} = 
+\mathscr{Z}^{-1}\bigg\{Y(z) - \frac{1}{2}z^{-1}Y(z) - \frac{1}{2}z^{-2}Y(z)\bigg\} \\
+x[n] + \frac{1}{2}x[n-1] - \frac{1}{2}x[n-2] = y[n] - \frac{1}{2}y[n-1] - \frac{1}{2}y[n-2]
+\end{gather*}
+
+\answer
+Για την νέα απόκριση συχνότητας $H'(z)$ έχουμε,
+
+\begin{gather*}
+H'(z) = \frac{X(z)}{Y(z)} \\
+H'(z) = \frac{\left(z+\frac{1}{2}\right)(z-1)}{\left(z-\frac{1}{2}\right)(z+1)}\\
+H'(z) = \frac{z^2-\frac{1}{2}z-\frac{1}{2}}{z^2+\frac{1}{2}z-\frac{1}{2}}
+\end{gather*}
+
+Εφαρμόζουμε τη μέθοδο της διαίρεσης πολυωνύμων,
+\begin{equation*}
+  \setlength\extrarowheight{2pt}
+  \begin{array}{r|l}
+    \dropsign{-} z^2 - \frac{1}{2}z-\frac{1}{2}\hphantom{{}+{}\frac{0}{1}z^{-1}}& z^2+\frac{1}{2}z-\frac{1}{2} \\[2pt] \cline{2-2}
+    z^2+\frac{1}{2}z-\frac{1}{2}\hphantom{{}+{}\frac{0}{1}z^{-1}}& 1 - z^{-1} + \dots \\[2pt] \longdivline
+     \dropsign{-} -z\hphantom{{}-{}\frac{0}{1}{}+{}\frac{0}{1}z^{-1}}&\\[2pt]
+                  -z-\frac{1}{2}+\frac{1}{2}z^{-1}&\\[2pt] \longdivline
+                     \frac{1}{2}-\frac{1}{2}z^{-1}&\\[2pt]
+  \end{array}
+\end{equation*}
+
+Άρα $h'[0] = 1$
+
+Αναλύοντας το $H'(z)$ σε κλάσματα παίρνουμε:
+
+\begin{gather*}
+Η'(z) = \frac{1}{3}\cdot\frac{z}{z-\frac{1}{2}} + \frac{2}{3}\cdot\frac{z}{z+1} - \frac{1}{2}\cdot\frac{1}{z-\frac{1}{2}}\\
+\mathscr{Z}^{-1}\bigg\{G(z)\bigg\} = \mathscr{Z}^{-1}\bigg\{\frac{1}{3}\cdot\frac{z}{z-\frac{1}{2}} + \frac{2}{3}\cdot\frac{z}{z+1} - \frac{1}{2}\cdot\frac{1}{z-\frac{1}{2}}\bigg\}\\
+h'[n] = \frac{1}{3}\left(\frac{1}{2}\right)^nu[n] + \frac{2}{3}(-1)^nu[n] - \left(\frac{1}{2}\right)^nu[n-1]
+\end{gather*}
+
+\end{answers}
+
+\end{document}
