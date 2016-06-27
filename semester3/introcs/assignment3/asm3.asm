@@ -1,18 +1,17 @@
-.ORIG x3000
+.orig x3000
 
-LEA R0, string
-AND R1, R1, #0
-
-
-LOOP LDR R2, R0, #0
-     BRz END
-     ADD R1, R1, #1
-     ADD R0, R0, #1
-     BR LOOP
-
-END HALT
-
-string .STRINGZ "hello world!"
+lea r0, string
+and r1, r1, #0
 
 
-.END
+loop ldr r2, r0, #0
+     brz end
+     add r1, r1, #1
+     add r0, r0, #1
+     br loop
+
+end halt
+
+string .stringz "hello world!"
+
+.end

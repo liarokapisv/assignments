@@ -1,36 +1,36 @@
-.ORIG x3000
+.orig x3000
 
-    LD R0, array_start
-    LD R1, length
+    ld r0, array_start
+    ld r1, length
  
-    ADD R2, R0, #1 
+    add r2, r0, #1 
     
-    LDR R0, R0, #0
+    ldr r0, r0, #0
 
-PROG_LOOP 
+prog_loop 
 
-    ADD R1, R1, #-1
-    BRz PROG_END
+    add r1, r1, #-1
+    brz prog_end
 
-    LDR R3, R2, #0
-    NOT R3, R3
-    ADD R3, R3, #1
-    ADD R3, R3, R0
-    BRzp END_IF_1
+    ldr r3, r2, #0
+    not r3, r3
+    add r3, r3, #1
+    add r3, r3, r0
+    brzp end_if
 
-    LDR R0, R2, #0
+    ldr r0, r2, #0
 
-END_IF_1
+end_if
 
-    ADD R2, R2, #1
+    add r2, r2, #1
 
-    BR PROG_LOOP
+    br prog_loop
 
-PROG_END 
+prog_end 
 
-    HALT
+    halt
 
-length .FILL #20
-array_start .FILL x4000
+length .fill #20
+array_start .fill x4000
 
-.END
+.end

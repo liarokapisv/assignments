@@ -1,28 +1,28 @@
-.ORIG x3000
+.orig x3000
      
-     LD R0, NUMBER0 
-     AND R2, R2, #0 
-     LD R1, NUMBER1
-     BRz End
+     ld r0, number0 
+     and r2, r2, #0 
+     ld r1, number1
+     brz end
 
-     NOT R1, R1     
-     ADD R1, R1, #1 
+     not r1, r1     
+     add r1, r1, #1 
 
-Loop ADD R2, R2, #1
-     ADD R0, R0, R1
-     BRzp Loop
+loop add r2, r2, #1
+     add r0, r0, r1
+     brzp loop
 
-     NOT R1, R1
-     ADD R1, R1, #1
-     ADD R1, R1, R0
+     not r1, r1
+     add r1, r1, #1
+     add r1, r1, r0
 
-     ADD R0, R2, #-1
+     add r0, r2, #-1
 
-End  HALT
+end  halt
      
-     NUMBER0 .FILL #4
-     NUMBER1 .FILL #0
+     number0 .fill #4
+     number1 .fill #0
 
-.END
+.end
 
 

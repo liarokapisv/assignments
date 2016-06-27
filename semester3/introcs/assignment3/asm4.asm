@@ -1,116 +1,116 @@
-.ORIG x3000
+.orig x3000
 
 ;------ example -----
 
-LD R0, exnum1
-LD R1, exnum2
-JSR DIVIDE
+ld r0, exnum1
+ld r1, exnum2
+jsr divide
 
-LD R0, exnum3
-LD R1, exnum4
-JSR XOR
+ld r0, exnum3
+ld r1, exnum4
+jsr xor
 
-LEA R0, string
-JSR LENGTH
+lea r0, string
+jsr length
 
-HALT
+halt
 
 ;------ subroutines ----
 
-DIVIDE ; R0 : numerator, R1 : denumerator -> R0 : div, R1 : mod, R2 : valid
+divide ; r0 : numerator, r1 : denumerator -> r0 : div, r1 : mod, r2 : valid
 
-divide_r7 .BLKW 1
+divide_r7 .blkw 1
 
-    ST R7, divide_r7
+    st r7, divide_r7
 
-    AND R2, R2, #0 
-    AND R1, R1, R1
-    BRz DIVIDE_END
+    and r2, r2, #0 
+    and r1, r1, r1
+    brz divide_end
 
-    NOT R1, R1     
-    ADD R1, R1, #1 
+    not r1, r1     
+    add r1, r1, #1 
 
-DIVIDE_LOOP
+divide_loop
    
-    ADD R2, R2, #1
-    ADD R0, R0, R1
-    BRzp DIVIDE_LOOP
+    add r2, r2, #1
+    add r0, r0, r1
+    brzp divide_loop
 
-    NOT R1, R1
-    ADD R1, R1, #1
-    ADD R1, R1, R0
+    not r1, r1
+    add r1, r1, #1
+    add r1, r1, r0
 
-    ADD R0, R2, #-1
-
-
-DIVIDE_END
-    LD R7, divide_r7
-    RET
+    add r0, r2, #-1
 
 
-XOR ; R0 : NUM1, R1 : NUM2 -> R0 : result
+divide_end
+    ld r7, divide_r7
+    ret
 
-xor_r7 .BLKW 1
-xor_r2 .BLKW 1
 
-    ST R7, xor_r7
-    ST R2, xor_r2
+xor ; r0 : num1, r1 : num2 -> r0 : result
+
+xor_r7 .blkw 1
+xor_r2 .blkw 1
+
+    st r7, xor_r7
+    st r2, xor_r2
   
-    ADD R2, R0, #0
-    NOT R2, R2
-    AND R2, R2, R1
-    NOT R2, R2
+    add r2, r0, #0
+    not r2, r2
+    and r2, r2, r1
+    not r2, r2
 
-    NOT R1, R1
-    AND R1, R1, R0
-    NOT R1, R1
+    not r1, r1
+    and r1, r1, r0
+    not r1, r1
 
-    AND R2, R2, R1
-    NOT R2, R2
+    and r2, r2, r1
+    not r2, r2
 
-    ADD R0, R2, #0
+    add r0, r2, #0
   
-    LD R2, xor_r2
-    LD R7, xor_r7
-    RET
+    ld r2, xor_r2
+    ld r7, xor_r7
+    ret
 
 
-LENGTH ; R0 : address -> R0 : length
+length ; r0 : address -> r0 : length
 
-length_r7 .BLKW 1
-length_r1 .BLKW 1
-length_r2 .BLKW 1
+length_r7 .blkw 1
+length_r1 .blkw 1
+length_r2 .blkw 1
 
-    ST R7, length_r7
-    ST R1, length_r1
-    ST R2, length_r2
+    st r7, length_r7
+    st r1, length_r1
+    st r2, length_r2
 
-    AND R1, R1, #0
+    and r1, r1, #0
     
-    LDR R2, R0, #0
-    BRz LENGTH_END
+    ldr r2, r0, #0
+    brz length_end
 
-LENGTH_LOOP
+length_loop
    
-    ADD R1, R1, #1
-    ADD R0, R0, #1
-    LDR R2, R0, #0
-    BRnp LENGTH_LOOP
+    add r1, r1, #1
+    add r0, r0, #1
+    ldr r2, r0, #0
+    brnp length_loop
 
-LENGTH_END
+length_end
 
-    ADD R0, R1, #0
+    add r0, r1, #0
     
-    LD R2, length_r2
-    LD R1, length_r1
-    LD R7, length_r7
-    RET
+    ld r2, length_r2
+    ld r1, length_r1
+    ld r7, length_r7
+    ret
 
-string .STRINGZ "hello world!"
-exnum1 .FILL #11
-exnum2 .FILL #3
-exnum3 .FILL x000F
-exnum4 .FILL x000A
+string .stringz "hello world!"
+exnum1 .fill #11
+exnum2 .fill #3
+exnum3 .fill x000f
+exnum4 .fill x000a
 
 
-.END
+.end

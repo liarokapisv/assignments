@@ -1,24 +1,24 @@
-.ORIG x3000
+.orig x3000
 
-LD R1, NUMBER1
-LD R2, NUMBER2
+ld r1, number1
+ld r2, number2
 
-ADD R3, R1, #0
-NOT R3, R3
-AND R3, R3, R2
-NOT R3, R3
+add r3, r1, #0
+not r3, r3
+and r3, r3, r2
+not r3, r3
 
-NOT R2, R2
-AND R2, R2, R1
-NOT R2, R2
+not r2, r2
+and r2, r2, r1
+not r2, r2
 
-AND R3, R3, R2
-NOT R3, R3
+and r3, r3, r2
+not r3, r3
 
-HALT
+halt
 
-NUMBER1 .FILL #123
-NUMBER2 .FILL #234
+number1 .fill #123
+number2 .fill #234
 
 
-.END
+.end
