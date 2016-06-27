@@ -226,7 +226,7 @@ make_number_loop
     not r3, r3
     add r3, r3, #1
     add r3, r3, r0
-    BRn make_number_end
+    brn make_number_end
 
     ; r3 = *r3
     ldr r3, r0, #0
