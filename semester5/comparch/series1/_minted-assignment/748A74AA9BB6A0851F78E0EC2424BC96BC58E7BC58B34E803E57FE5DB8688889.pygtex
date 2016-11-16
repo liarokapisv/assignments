@@ -1,0 +1,35 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{}
+                                                        \PYGZsh{}   
+                .data                                   \PYGZsh{}
+                                                        \PYGZsh{}
+array:          .word   5, 9, 8, 7, 6, 10, 4, 3, 2, 1   \PYGZsh{}       uint32\PYGZus{}t array[10] = \PYGZob{}5, 9, 8, 7, 6, 10, 4, 3, 2, 1\PYGZcb{}
+                                                        \PYGZsh{}
+                .text                                   \PYGZsh{}
+                                                        \PYGZsh{}
+                                                        \PYGZsh{}       void main():
+main:           la      \PYGZdl{}s1,    array                   \PYGZsh{}               s1 = \PYGZam{}array                
+                addi    \PYGZdl{}s3,    \PYGZdl{}0,     10              \PYGZsh{}               s3 = 10 // n = 10
+                add     \PYGZdl{}t0,    \PYGZdl{}zero,  \PYGZdl{}zero           \PYGZsh{}               t0 = 0
+I\PYGZus{}LOOP:         beq     \PYGZdl{}t0,    \PYGZdl{}s3,    END             \PYGZsh{}  I\PYGZus{}LOOP:      if t0 == s3 goto END // if (t0 == n) ..
+                add     \PYGZdl{}t1,    \PYGZdl{}zero,  \PYGZdl{}zero           \PYGZsh{}               t1 = 0  
+J\PYGZus{}LOOP:         sub     \PYGZdl{}t2,    \PYGZdl{}s3,    \PYGZdl{}t0             \PYGZsh{}               t2 = s3 \PYGZhy{} t0    
+                addi    \PYGZdl{}t2,    \PYGZdl{}t2,    \PYGZhy{}1              \PYGZsh{}               t2 = t2 \PYGZhy{} 1
+                beq     \PYGZdl{}t1,    \PYGZdl{}t2,    NEXT\PYGZus{}I          \PYGZsh{}  J\PYGZus{}LOOP:      if t1 == t2 goto NEXT\PYGZus{}I // if (t1 == n \PYGZhy{} t0 \PYGZhy{} 1) ..
+                sll     \PYGZdl{}t2,    \PYGZdl{}t1,    2               \PYGZsh{}               t2 = t1 \PYGZlt{}\PYGZlt{} 2
+                add     \PYGZdl{}t2,    \PYGZdl{}t2,    \PYGZdl{}s1             \PYGZsh{}               t2 = s1 + t2 
+                lw      \PYGZdl{}t3,    0(\PYGZdl{}t2)                  \PYGZsh{}               t3 = *((uint32\PYGZus{}t*)(t2))   // t3 = array[t1]
+                lw      \PYGZdl{}t4,    4(\PYGZdl{}t2)                  \PYGZsh{}               t4 = *((uint32\PYGZus{}t*)(t2+4)) // t4 = array[t1+1]
+                slt     \PYGZdl{}t5,    \PYGZdl{}t4,    \PYGZdl{}t3             \PYGZsh{}               t5 = t4 \PYGZlt{} t3
+                beq     \PYGZdl{}t5,    \PYGZdl{}zero,  NEXT\PYGZus{}J          \PYGZsh{}               if (t5 == 0) goto NEXT\PYGZus{}J // if !(t4 \PYGZlt{} t3) ..
+                sw      \PYGZdl{}t4,    0(\PYGZdl{}t2)                  \PYGZsh{}               *((uint32\PYGZus{}t*)t2) = t4 // array[t1] = array[t1+1]
+                sw      \PYGZdl{}t3,    4(\PYGZdl{}t2)                  \PYGZsh{}               *((uint32\PYGZus{}t*)(t2+1)) = t3 // array[t1+1] = array[t1]
+NEXT\PYGZus{}J:         addi    \PYGZdl{}t1,    \PYGZdl{}t1,    1               \PYGZsh{}  NEXT\PYGZus{}J:      ++t1    
+                j       J\PYGZus{}LOOP                          \PYGZsh{}               goto J\PYGZus{}LOOP
+NEXT\PYGZus{}I:         addi    \PYGZdl{}t0,    \PYGZdl{}t0,    1               \PYGZsh{}  NEXT\PYGZus{}I:      ++t0
+                j       I\PYGZus{}LOOP                          \PYGZsh{}               goto I\PYGZus{}LOOP
+END:            addi    \PYGZdl{}v0,    \PYGZdl{}0,     10              \PYGZsh{}  END:         v0 = 10
+                syscall                                 \PYGZsh{}               system call (exit)
+                                                        \PYGZsh{}
+\PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{}
+\end{Verbatim}

@@ -1,0 +1,149 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{}
+                                                                        \PYGZsh{}
+                .data   0x10000000                                      \PYGZsh{}         data starts at address 0x10000000
+                                                                        \PYGZsh{}
+global\PYGZus{}x:       .space  4                                               \PYGZsh{}         uint32\PYGZus{}t global\PYGZus{}x
+global\PYGZus{}y:       .space  4                                               \PYGZsh{}         uint32\PYGZus{}t global\PYGZus{}y
+global\PYGZus{}z:       .space  4                                               \PYGZsh{}         uint32\PYGZus{}t global\PYGZus{}z
+global\PYGZus{}w:       .space  4                                               \PYGZsh{}         uint32\PYGZus{}t global\PYGZus{}w
+                                                                        \PYGZsh{}
+global\PYGZus{}array:   .word    10, 5, 8, 2, 7, 3, 1, 9, 4, 6                  \PYGZsh{}         uint32\PYGZus{}t global\PYGZus{}array[] = \PYGZob{}10, 5, 8, 2, 7, 3, 1, 9, 4, 6\PYGZcb{}
+                                                                        \PYGZsh{}
+                .text                                                   \PYGZsh{}
+                                                                        \PYGZsh{}         void xorshift\PYGZus{}init(a0, a1, a2, a3):
+xorshift\PYGZus{}init:  sw      \PYGZdl{}a0,            global\PYGZus{}x                        \PYGZsh{}                 global\PYGZus{}x = a0
+                sw      \PYGZdl{}a1,            global\PYGZus{}y                        \PYGZsh{}                 global\PYGZus{}y = a1
+                sw      \PYGZdl{}a2,            global\PYGZus{}z                        \PYGZsh{}                 global\PYGZus{}z = a2
+                sw      \PYGZdl{}a3,            global\PYGZus{}w                        \PYGZsh{}                 global\PYGZus{}w = a3
+                jr      \PYGZdl{}ra                                             \PYGZsh{}                 return to ra
+                                                                        \PYGZsh{}
+                                                                        \PYGZsh{}         uint32\PYGZus{}t xorshift():
+xorshift:       lw      \PYGZdl{}t0,            global\PYGZus{}x                        \PYGZsh{}                 t0 = global\PYGZus{}x
+                sll     \PYGZdl{}t1,            \PYGZdl{}t0,            11              \PYGZsh{}                 t1 = t0 \PYGZlt{}\PYGZlt{} 11
+                xor     \PYGZdl{}t0,            \PYGZdl{}t0,            \PYGZdl{}t1             \PYGZsh{}                 t0 = t0 \PYGZca{} t1
+                srl     \PYGZdl{}t1,            \PYGZdl{}t1,            8               \PYGZsh{}                 t1 = t1 \PYGZgt{}\PYGZgt{} 8
+                xor     \PYGZdl{}t0,            \PYGZdl{}t0,            \PYGZdl{}t1             \PYGZsh{}                 t0 = t0 \PYGZca{} t1
+                lw      \PYGZdl{}t1,            global\PYGZus{}y                        \PYGZsh{}                 t1 = global\PYGZus{}y
+                sw      \PYGZdl{}t1,            global\PYGZus{}x                        \PYGZsh{}                 global\PYGZus{}x = t1
+                lw      \PYGZdl{}t1,            global\PYGZus{}z                        \PYGZsh{}                 t1 = global\PYGZus{}z
+                sw      \PYGZdl{}t1,            global\PYGZus{}y                        \PYGZsh{}                 global\PYGZus{}y = t1
+                lw      \PYGZdl{}t1,            global\PYGZus{}w                        \PYGZsh{}                 t1 = global\PYGZus{}w
+                sw      \PYGZdl{}t1,            global\PYGZus{}z                        \PYGZsh{}                 global\PYGZus{}z = t1
+                srl     \PYGZdl{}t2,            \PYGZdl{}t1,            19              \PYGZsh{}                 t2 = t1 \PYGZgt{}\PYGZgt{} 19
+                xor     \PYGZdl{}t1,            \PYGZdl{}t1,            \PYGZdl{}t2             \PYGZsh{}                 t1 = t1 \PYGZca{} t2
+                xor     \PYGZdl{}t1,            \PYGZdl{}t1,            \PYGZdl{}t0             \PYGZsh{}                 t1 = t1 \PYGZca{} t0
+                sw      \PYGZdl{}t1,            global\PYGZus{}w                        \PYGZsh{}                 global\PYGZus{}w = t1
+                addi    \PYGZdl{}v0,            \PYGZdl{}t1,            0               \PYGZsh{}                 v0 = t1
+                jr      \PYGZdl{}ra                                             \PYGZsh{}                 return to ra
+                                                                        \PYGZsh{} 
+                                                                        \PYGZsh{}         void swap(a0, a1):
+swap:           lw       \PYGZdl{}t0,           0(\PYGZdl{}a0)                          \PYGZsh{}                 t0 = *((uint32\PYGZus{}t*)a0)
+                lw       \PYGZdl{}t1,           0(\PYGZdl{}a1)                          \PYGZsh{}                 t1 = *((uint32\PYGZus{}t*)a1)
+                sw       \PYGZdl{}t0,           0(\PYGZdl{}a1)                          \PYGZsh{}                 *((uint32\PYGZus{}t*)a1) = t0
+                sw       \PYGZdl{}t1,           0(\PYGZdl{}a0)                          \PYGZsh{}                 *((uint32\PYGZus{}t*)a0) = t1
+                jr       \PYGZdl{}ra                                            \PYGZsh{}                 return to ra
+                                                                        \PYGZsh{} 
+                                                                        \PYGZsh{}         uint32\PYGZus{}t partition(a0, a1, a2):
+partition:      addi     \PYGZdl{}sp,           \PYGZdl{}sp,      \PYGZhy{}20                   \PYGZsh{}                 allocate stack space 
+                sw       \PYGZdl{}s0,           0(\PYGZdl{}sp)                          \PYGZsh{}                 store s0 
+                sw       \PYGZdl{}s1,           4(\PYGZdl{}sp)                          \PYGZsh{}                 store s1
+                sw       \PYGZdl{}s2,           8(\PYGZdl{}sp)                          \PYGZsh{}                 store s2                        
+                sw       \PYGZdl{}s3,           12(\PYGZdl{}sp)                         \PYGZsh{}                 store s3
+                sw       \PYGZdl{}ra,           16(\PYGZdl{}sp)                         \PYGZsh{}                 store ra        
+                addi     \PYGZdl{}s0,           \PYGZdl{}a0,      0                     \PYGZsh{}                 s0 = a0
+                addi     \PYGZdl{}s1,           \PYGZdl{}a1,      0                     \PYGZsh{}                 s1 = a1
+                addi     \PYGZdl{}s2,           \PYGZdl{}a2,      0                     \PYGZsh{}                 s2 = a2
+                sll      \PYGZdl{}s3,           \PYGZdl{}s1,      2                     \PYGZsh{}                 s3 = s1 \PYGZlt{}\PYGZlt{} 2
+                add      \PYGZdl{}s3,           \PYGZdl{}s3,      \PYGZdl{}s0                   \PYGZsh{}                 s3 = s3 + s0
+                lw       \PYGZdl{}s3,           0(\PYGZdl{}s3)                          \PYGZsh{}                 s3 = *((uint32\PYGZus{}t*)s3) // s3 = ((uint32\PYGZus{}t*)s0)[s1]
+                addi     \PYGZdl{}s1,           \PYGZdl{}s1,      \PYGZhy{}1                    \PYGZsh{}                 \PYGZhy{}\PYGZhy{}s1
+                addi     \PYGZdl{}s2,           \PYGZdl{}s2,      1                     \PYGZsh{}                 ++s2
+partition\PYGZus{}L1:   addi     \PYGZdl{}s1,           \PYGZdl{}s1,      1                     \PYGZsh{}  part\PYGZus{}L1:       ++s1            
+                sll      \PYGZdl{}t0,           \PYGZdl{}s1,      2                     \PYGZsh{}                 t0 = s1 \PYGZlt{}\PYGZlt{} 2
+                add      \PYGZdl{}t0,           \PYGZdl{}s0,      \PYGZdl{}t0                   \PYGZsh{}                 t0 = s0 + t0
+                lw       \PYGZdl{}t0,           0(\PYGZdl{}t0)                          \PYGZsh{}                 t0 = *((uint32\PYGZus{}t*)t0) // t0 = ((uint32\PYGZus{}t*)s0)[s1]  
+                slt      \PYGZdl{}t0,           \PYGZdl{}t0,      \PYGZdl{}s3                   \PYGZsh{}                 t0 = t0 \PYGZlt{} s3 
+                bne      \PYGZdl{}t0,           \PYGZdl{}0,       partition\PYGZus{}L1          \PYGZsh{}                 if t0 != 0 goto part\PYGZus{}L1 // if ((uint32\PYGZus{}t*)s0)[s1] \PYGZlt{} s3 ..
+partition\PYGZus{}L2:   addi     \PYGZdl{}s2,           \PYGZdl{}s2,      \PYGZhy{}1                    \PYGZsh{}  part\PYGZus{}L2:       \PYGZhy{}\PYGZhy{}s2
+                sll      \PYGZdl{}t0,           \PYGZdl{}s2,      2                     \PYGZsh{}                 t0 = s2 \PYGZlt{}\PYGZlt{} 2
+                add      \PYGZdl{}t0,           \PYGZdl{}s0,      \PYGZdl{}t0                   \PYGZsh{}                 t0 = s0 + t0
+                lw       \PYGZdl{}t0,           0(\PYGZdl{}t0)                          \PYGZsh{}                 t0 = *((uint32\PYGZus{}t*)t0)
+                sgt      \PYGZdl{}t0,           \PYGZdl{}t0,      \PYGZdl{}s3                   \PYGZsh{}                 t0 = t0 \PYGZgt{} s3
+                bne      \PYGZdl{}t0,           \PYGZdl{}0,       partition\PYGZus{}L2          \PYGZsh{}                 if t0 != 0 goto part\PYGZus{}L2 // if ((uint32\PYGZus{}t*)s0)[s2] \PYGZgt{} s3 ..
+                sge      \PYGZdl{}t0,           \PYGZdl{}s1,      \PYGZdl{}s2                   \PYGZsh{}                 t0 = s1 \PYGZgt{}= s2
+                bne      \PYGZdl{}t0,           \PYGZdl{}0,       partition\PYGZus{}end         \PYGZsh{}                 if t0 != 0 goto part\PYGZus{}end // if s1 \PYGZgt{}= s2 ...
+                sll      \PYGZdl{}a0,           \PYGZdl{}s1,      2                     \PYGZsh{}                 a0 = s1 \PYGZlt{}\PYGZlt{} 2
+                add      \PYGZdl{}a0,           \PYGZdl{}s0,      \PYGZdl{}a0                   \PYGZsh{}                 a0 = s0 + a0 // a0 = \PYGZam{}(((uint32\PYGZus{}t*)s0)[s1])
+                sll      \PYGZdl{}a1,           \PYGZdl{}s2,      2                     \PYGZsh{}                 a1 = s2 \PYGZlt{}\PYGZlt{} 2
+                add      \PYGZdl{}a1,           \PYGZdl{}s0,      \PYGZdl{}a1                   \PYGZsh{}                 a1 = s0 + a1 // a1 = \PYGZam{}(((uint32\PYGZus{}t*)s0)[s2])
+                jal      swap                                           \PYGZsh{}                 call swap
+                j        partition\PYGZus{}L1                                   \PYGZsh{}                 goto part\PYGZus{}L1       
+                                                                        \PYGZsh{} 
+partition\PYGZus{}end:  addi     \PYGZdl{}v0,           \PYGZdl{}s2,      0                     \PYGZsh{}  part\PYGZus{}end:      v0 = s2 // return value 
+                lw       \PYGZdl{}s0,           0(\PYGZdl{}sp)                          \PYGZsh{}                 restore s0
+                lw       \PYGZdl{}s1,           4(\PYGZdl{}sp)                          \PYGZsh{}                 restore s1
+                lw       \PYGZdl{}s2,           8(\PYGZdl{}sp)                          \PYGZsh{}                 restore s2
+                lw       \PYGZdl{}s3,           12(\PYGZdl{}sp)                         \PYGZsh{}                 restore s3
+                lw       \PYGZdl{}ra,           16(\PYGZdl{}sp)                         \PYGZsh{}                 restore ra
+                addi     \PYGZdl{}sp,           \PYGZdl{}sp,      20                    \PYGZsh{}                 deallocate stack space
+                jr       \PYGZdl{}ra                                            \PYGZsh{}                 return to ra
+                                                                        \PYGZsh{}
+                                                                        \PYGZsh{}         void quicksort(a0, a1, a2):
+quicksort:      addi     \PYGZdl{}sp,           \PYGZdl{}sp,      \PYGZhy{}20                   \PYGZsh{}                 allocate stack space
+                sw       \PYGZdl{}s0,           0(\PYGZdl{}sp)                          \PYGZsh{}                 store s0 
+                sw       \PYGZdl{}s1,           4(\PYGZdl{}sp)                          \PYGZsh{}                 store s1
+                sw       \PYGZdl{}s2,           8(\PYGZdl{}sp)                          \PYGZsh{}                 store s2
+                sw       \PYGZdl{}s3,           12(\PYGZdl{}sp)                         \PYGZsh{}                 store s3
+                sw       \PYGZdl{}ra,           16(\PYGZdl{}sp)                         \PYGZsh{}                 store ra
+                addi     \PYGZdl{}s0,           \PYGZdl{}a0,      0                     \PYGZsh{}                 s0 = a0
+                addi     \PYGZdl{}s1,           \PYGZdl{}a1,      0                     \PYGZsh{}                 s1 = a1
+                addi     \PYGZdl{}s2,           \PYGZdl{}a2,      0                     \PYGZsh{}                 s2 = a2
+                sge      \PYGZdl{}t0,           \PYGZdl{}s1,      \PYGZdl{}s2                   \PYGZsh{}                 t0 = s1 \PYGZgt{}= s2
+                bne      \PYGZdl{}t0,           \PYGZdl{}0,       quicksort\PYGZus{}end         \PYGZsh{}                 if t0 != 0 goto quicksort\PYGZus{}end // if s1 \PYGZgt{}= s2 ..
+                jal      xorshift                                       \PYGZsh{}                 call xorshift
+                sub      \PYGZdl{}a0,           \PYGZdl{}s2,      \PYGZdl{}s1                   \PYGZsh{}                 a0 = s2\PYGZhy{}s1
+                divu     \PYGZdl{}v0,           \PYGZdl{}a0                             \PYGZsh{}                 
+                mfhi     \PYGZdl{}a0                                            \PYGZsh{}                 a0 = v0 \PYGZpc{} a0
+                add      \PYGZdl{}a0,           \PYGZdl{}a0,      \PYGZdl{}s1                   \PYGZsh{}                 a0 = a0 + s1 
+                sll      \PYGZdl{}a0,           \PYGZdl{}a0,      2                     \PYGZsh{}                 a0 = a0 \PYGZlt{}\PYGZlt{} 2    
+                add      \PYGZdl{}a0,           \PYGZdl{}s0,      \PYGZdl{}a0                   \PYGZsh{}                 a0 = s0 + a0 // a0 = \PYGZam{}(((uint32\PYGZus{}t*)s0)[a0])
+                sll      \PYGZdl{}a1,           \PYGZdl{}s1,      2                     \PYGZsh{}                 a1 = s1 \PYGZlt{}\PYGZlt{} 2
+                add      \PYGZdl{}a1,           \PYGZdl{}s0,      \PYGZdl{}a1,                  \PYGZsh{}                 a1 = s0 + a1 // a1 = \PYGZam{}(((uint32\PYGZus{}t*)s0)[a1])
+                jal      swap                                           \PYGZsh{}                 call swap
+                addi     \PYGZdl{}a0,           \PYGZdl{}s0,      0                     \PYGZsh{}                 a0 = s0
+                addi     \PYGZdl{}a1,           \PYGZdl{}s1,      0                     \PYGZsh{}                 a1 = s1
+                addi     \PYGZdl{}a2,           \PYGZdl{}s2,      0                     \PYGZsh{}                 a2 = s2
+                jal      partition                                      \PYGZsh{}                 call partition
+                addi     \PYGZdl{}s3,           \PYGZdl{}v0,      0                     \PYGZsh{}                 s3 = v0
+                addi     \PYGZdl{}a0,           \PYGZdl{}s0,      0                     \PYGZsh{}                 a0 = s0
+                addi     \PYGZdl{}a1,           \PYGZdl{}s1,      0                     \PYGZsh{}                 a1 = s1
+                addi     \PYGZdl{}a2,           \PYGZdl{}s3,      0                     \PYGZsh{}                 a2 = s3
+                jal      quicksort                                      \PYGZsh{}                 call quicksort
+                addi     \PYGZdl{}a0,           \PYGZdl{}s0,      0                     \PYGZsh{}                 a0 = s0
+                addi     \PYGZdl{}a1,           \PYGZdl{}s3,      1                     \PYGZsh{}                 a1 = s3+1
+                addi     \PYGZdl{}a2,           \PYGZdl{}s2,      0                     \PYGZsh{}                 a2 = s2
+                jal      quicksort                                      \PYGZsh{}                 call quicksort
+quicksort\PYGZus{}end:  lw       \PYGZdl{}s0,           0(\PYGZdl{}sp)                          \PYGZsh{}                 restore s0
+                lw       \PYGZdl{}s1,           4(\PYGZdl{}sp)                          \PYGZsh{}                 restore s1
+                lw       \PYGZdl{}s2,           8(\PYGZdl{}sp)                          \PYGZsh{}                 restore s2
+                lw       \PYGZdl{}s3,           12(\PYGZdl{}sp)                         \PYGZsh{}                 restore s3
+                lw       \PYGZdl{}ra,           16(\PYGZdl{}sp)                         \PYGZsh{}                 restore ra
+                addi     \PYGZdl{}sp,           \PYGZdl{}sp,      20                    \PYGZsh{}                 deallocate stack space
+                jr       \PYGZdl{}ra                                            \PYGZsh{}                 return to ra
+                                                                        \PYGZsh{}
+                                                                        \PYGZsh{}         void main():
+main:           addi     \PYGZdl{}a0,           \PYGZdl{}0,       1231                  \PYGZsh{}                 a0 = 1231
+                addi     \PYGZdl{}a1,           \PYGZdl{}0,       3453                  \PYGZsh{}                 a1 = 3453
+                addi     \PYGZdl{}a2,           \PYGZdl{}0,       5675                  \PYGZsh{}                 a2 = 5675
+                addi     \PYGZdl{}a3,           \PYGZdl{}0,       7898                  \PYGZsh{}                 a3 = 7898
+                jal      xorshift\PYGZus{}init                                  \PYGZsh{}                 call xorshift\PYGZus{}init
+                la       \PYGZdl{}a0,           global\PYGZus{}array                    \PYGZsh{}                 a0 = \PYGZam{}global\PYGZus{}array
+                addi     \PYGZdl{}a1,           \PYGZdl{}0,       0                     \PYGZsh{}                 a1 = 0
+                addi     \PYGZdl{}a2,           \PYGZdl{}0,       9                     \PYGZsh{}                 a2 = 9
+                jal      quicksort                                      \PYGZsh{}                 call quicksort
+                addi     \PYGZdl{}v0,           \PYGZdl{}0,       10                    \PYGZsh{}                 v0 = 10
+                syscall                                                 \PYGZsh{}                 system call (exit)
+                                                                        \PYGZsh{}
+\PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{}
+\end{Verbatim}

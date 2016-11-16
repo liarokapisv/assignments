@@ -1,0 +1,53 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{}      
+                                                                \PYGZsh{}
+                .data   0x10000000                              \PYGZsh{}       data starts at address 0x10000000                                               
+                                                                \PYGZsh{}
+global\PYGZus{}x:       .space  4                                       \PYGZsh{}       uint32\PYGZus{}t x
+global\PYGZus{}y:       .space  4                                       \PYGZsh{}       uint32\PYGZus{}t y
+global\PYGZus{}z:       .space  4                                       \PYGZsh{}       uint32\PYGZus{}t z
+global\PYGZus{}w:       .space  4                                       \PYGZsh{}       uint32\PYGZus{}t w
+                                                                \PYGZsh{}
+                .text                                           \PYGZsh{}
+                                                                \PYGZsh{}       void xorshift\PYGZus{}init(a0, a1, a2, a3):
+xorshift\PYGZus{}init:  sw      \PYGZdl{}a0,            global\PYGZus{}x                \PYGZsh{}               x = a0
+                sw      \PYGZdl{}a1,            global\PYGZus{}y                \PYGZsh{}               y = a1
+                sw      \PYGZdl{}a2,            global\PYGZus{}z                \PYGZsh{}               z = a2
+                sw      \PYGZdl{}a3,            global\PYGZus{}w                \PYGZsh{}               w = a3
+                jr      \PYGZdl{}ra                                     \PYGZsh{}               return to ra
+                                                                \PYGZsh{}
+                                                                \PYGZsh{}       uint32\PYGZus{}t xorshift():
+xorshift:       lw      \PYGZdl{}t0,            global\PYGZus{}x                \PYGZsh{}               t0 = x1
+                sll     \PYGZdl{}t1,            \PYGZdl{}t0,            11      \PYGZsh{}               t1 = t0 \PYGZlt{}\PYGZlt{} 11
+                xor     \PYGZdl{}t0,            \PYGZdl{}t0,            \PYGZdl{}t1     \PYGZsh{}               t0 = t0 \PYGZca{} t1
+                srl     \PYGZdl{}t1,            \PYGZdl{}t1,            8       \PYGZsh{}               t1 = t1 \PYGZgt{}\PYGZgt{} 8
+                xor     \PYGZdl{}t0,            \PYGZdl{}t0,            \PYGZdl{}t1     \PYGZsh{}               t0 = t0 \PYGZca{} t1
+                lw      \PYGZdl{}t1,            global\PYGZus{}y                \PYGZsh{}               t1 = y
+                sw      \PYGZdl{}t1,            global\PYGZus{}x                \PYGZsh{}               x = t1
+                lw      \PYGZdl{}t1,            global\PYGZus{}z                \PYGZsh{}               t1 = z
+                sw      \PYGZdl{}t1,            global\PYGZus{}y                \PYGZsh{}               y = t1
+                lw      \PYGZdl{}t1,            global\PYGZus{}w                \PYGZsh{}               t1 = w
+                sw      \PYGZdl{}t1,            global\PYGZus{}z                \PYGZsh{}               z = t1
+                srl     \PYGZdl{}t2,            \PYGZdl{}t1,            19      \PYGZsh{}               t2 = t1 \PYGZgt{}\PYGZgt{} 19
+                xor     \PYGZdl{}t1,            \PYGZdl{}t1,            \PYGZdl{}t2     \PYGZsh{}               t1 = t1 \PYGZca{} t2
+                xor     \PYGZdl{}t1,            \PYGZdl{}t1,            \PYGZdl{}t0     \PYGZsh{}               t1 = t1 \PYGZca{} t0
+                sw      \PYGZdl{}t1,            global\PYGZus{}w                \PYGZsh{}               w = t1
+                addi    \PYGZdl{}v0,            \PYGZdl{}t1,            0       \PYGZsh{}               v0 = t1
+                jr      \PYGZdl{}ra                                     \PYGZsh{}               return to ra
+                                                                \PYGZsh{}
+                                                                \PYGZsh{}       void main():
+main:           addi    \PYGZdl{}a0,            \PYGZdl{}0,             1231    \PYGZsh{}               a0 = 1231
+                addi    \PYGZdl{}a1,            \PYGZdl{}0,             6456    \PYGZsh{}               a1 = 6456
+                addi    \PYGZdl{}a2,            \PYGZdl{}0,             3453    \PYGZsh{}               a2 = 3453
+                addi    \PYGZdl{}a3,            \PYGZdl{}0,             8567    \PYGZsh{}               a3 = 8567       
+                jal     xorshift\PYGZus{}init                           \PYGZsh{}               call xorshift\PYGZus{}init
+                                                                \PYGZsh{}
+                jal     xorshift                                \PYGZsh{}               call xorshift
+                jal     xorshift                                \PYGZsh{}               call xorshift
+                jal     xorshift                                \PYGZsh{}               call xorshift
+                                                                \PYGZsh{}                
+                addi    \PYGZdl{}v0,            \PYGZdl{}0,             10      \PYGZsh{}               v0 = 10
+                syscall                                         \PYGZsh{}               system call (exit)              
+                                                                \PYGZsh{}
+\PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{} \PYGZsh{}      
+\end{Verbatim}
