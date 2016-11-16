@@ -1,7 +1,0 @@
-#!/bin/bash
-
-cat $1 | cut -d ':' -f 1 > "tmp1"
-cat $1 | cut -d '#' -f 2 > "tmp2"
-cat $1 | cut -d ':' -f 2 | cut -d '#' -f 1 | column -t > "tmp3"
-paste -s "tmp1" "tmp2" "tmp3" > /dev/stdout
-  
