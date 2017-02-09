@@ -1,0 +1,257 @@
+\documentclass[10pt]{assignment}
+\usepackage{tabularx}
+\usepackage{parskip}
+\usepackage{minted}
+
+\class{Αρχιτεκτονική Υπολογιστών}
+\assignment{3η σειρά ασκήσεων}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{Z}{>{\centering\arraybackslash$}X<{$}}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.5}
+
+\begin{document}
+\maketitle
+
+\subsection*{Άσκηση 1}
+
+Παρατίθεται ο πίνακας διευθύνσεων σε δεκαεξαδική και δυαδική μορφή.
+
+\selectlanguage{english}
+\begin{center}
+\begin{tabularx}{1\textwidth}{|P{12pt}|Y|Y|Y|}
+\hline 
+ No & Hex Address & Binary Address & Cache Hit/Miss \\
+\hline 
+1 & 0x044 & 001000100 & Miss \\ 
+\hline 
+2 & 0x042 & 001000010 & Hit \\ 
+\hline 
+3 & 0x048 & 001001000 & Miss \\ 
+\hline 
+4 & 0x1af & 110101111 & Miss \\ 
+\hline 
+5 & 0x04a & 001001010 & Miss \\ 
+\hline 
+\end{tabularx} 
+\end{center}
+\selectlanguage{greek}
+\vspace{6pt}
+
+\begin{itemize}[leftmargin=*]
+\item Βλέπουμε πως στην 2 γίνεται \en{hit}, επομένως οι 1 και 2 έχουν ίδιο \en{tag} και \en{index}. Αφού τo 3o απο το τέλος \en{bit} είναι διαφορετικο, σίγουρα το \en{offset} θα είναι τουλάχιστον τα 3 τελευταία \en{bits}.
+\item Στην 3 γίνεται \en{miss} άρα έχει διαφορετικό \en{tag} ή \en{index} απο την 2. Αφού μόνο το 4ο \en{bit} διαφέρει και μας δίνει κάποια καινούργια πληροφορία, εξασφαλίζουμε πως το \en{offset} είναι τα 3 τελευταία \en{bits}, και πως το \en{index} περιέχει τουλάχιστον το 4ο.
+\item Τα 3 και 5 είναι σχεδόν πανομοιότυπα με μία μικρή διαφορά στo \en{offset}.
+Χωρίς κάποιο άλλο \en{cache query} μεταξύ τους θα έπρεπε να γίνει \en{hit}. Το γεγονός πως γίνεται \en{miss} σημαίνει πως το 4 έχει ίδιο \en{index} αφού επηρρεάζει το ίδιο \en{block} με τα 3,5 αλλα διαφορετικό \en{tag}. Έτσι το \en{index} μπορεί να είναι είτε μόνο το 4ο απο το τέλος \en{bit} είτε τα  \en{bits} 4 και 5 απο το τέλος. Το \en{tag} είναι όλα τα υπόλοιπα.
+\end{itemize}
+
+Σε κάθε περίπτωση το \en{offset} είναι 3 \en{bits} και αφού η ελάχιστη μονάδα διευθυνσιοδότησης είναι το \en{byte} κάθε \en{block} έχει μέγεθος 8 \en{bytes}.
+ 
+Στην περίπτωση που το \en{index} είναι 1 \en{bit} έχουμε 2 \en{blocks} και επομένως το μέγεθος του \en{cache} είναι 16 \en{bytes}.
+
+Αντίστοιχα στην περίπτωση που το \en{index} είναι 2 \en{bits}, έχουμε 4
+\en{blocks} και το μέγεθος του \en{cache} είναι 32 \en{bytes}	
+
+\newpage
+\subsection*{Άσκηση 2}
+
+Δίνεται ο κώδικας:
+\selectlanguage{english}
+\begin{center}
+\begin{minted}{c}
+int i, j;
+double a[8][8], b[8][8], c[64];
+
+for (i = 0; i < 8; ++i) {
+    for (j = 0; j < 8; ++j) {
+        if (i % 2 == 0) {
+            a[i][j] = a[i][j] + b[i][j] + c[8*i + j];
+        } else {
+            a[i][j] = a[i][j] + b[i][j];
+        }
+    }
+}
+\end{minted}
+\end{center}
+\selectlanguage{greek}
+Παίρνοντας το αποτέλεσμα ακέραιας διαίρεσης μίας διεύθυνσης με το μέγεθος του \en{cache}
+παίρνουμε τα \en{index} και \en{offset fields}. Και οι 3 πίνακες έχουν 64 στοιχεία των 8 
+\en{bytes} και επομένως μέγεθος ίσο με 512 \en{bytes}. Όπως είναι εμφανές απο την πρώτη πρόταση, τα $a[i][j]$, $b[i][j]$ και $c[8*i+j]$ έχουν ίδιο \en{index} και \en{offset} και το πρώτο στοιχείο τους έχει διεύθυνση που αντιστοιχεί στο \en{offset} 0 του \en{block} 0. Τα στοιχεία των πινάκων στη μνήμη διευθυνσιοδοτούνται διαδοχικά και μπορούμε να προβλέψουμε πως ανα 4 στοιχεία θα γεμίζει ένα \en{block}. Επίσης προβλέπουμε πως δεν θα
+υπάρξουν \en{capacity misses} αφού ένας πίνακας χωράει στο \en{cache}. 
+
+Παρατίθεται ο πίνακας διευθυνσιοδοτήσεων για τις δύο πρώτες επαναλήψεις με \en{direct-mapped cache}.
+
+\selectlanguage{english}
+\begin{center}
+\begin{tabularx}{\textwidth}{|Z|Z|Z|Z|Y|Y|Y|Y|}
+\hline
+a[0][0] & b[0][0] & c[0] & a[0][0] & com-m & m & m & m \\
+\hline
+a[0][1] & b[0][1] &      & a[0][1] & h & m & & m \\
+\hline
+a[0][2] & b[0][2] & c[2] & a[0][2] & h & m & m & m \\
+\hline
+a[0][3] & b[0][3] &      & a[0][3] & h & m & & m \\
+\hline
+a[0][4] & b[0][4] & c[4] & a[0][4] & com-m & m & m & m \\
+\hline
+a[0][5] & b[0][5] &      & a[0][5] & h & m & & m \\
+\hline
+a[0][6] & b[0][6] & c[6] & a[0][6] & h & m & m & m \\
+\hline
+a[0][7] & b[0][7] &      & a[0][7] & h & m & & m \\
+\hline
+a[1][0] & b[1][0] & c[8] & a[1][0] & com-m & m & m & m \\
+\hline
+a[1][1] & b[1][1] &      & a[1][1] & h & m & & m \\
+\hline
+a[1][2] & b[1][2] & c[10] & a[1][2] & h & m & m & m \\
+\hline
+a[1][3] & b[1][3] &       & a[1][3] & h & m & & m \\
+\hline
+a[1][4] & b[1][4] & c[12] & a[1][4] & com-m & m & m & m \\
+\hline
+a[1][5] & b[1][5] &       & a[1][5] & h & m & & m \\
+\hline
+a[1][6] & b[1][6] & c[14] & a[1][6] & h & m & m & m \\
+\hline
+a[1][7] & b[1][7] &       & a[1][7] & h & m & & m \\
+\hline
+\end{tabularx}
+\end{center}
+\selectlanguage{greek}
+\vspace{4pt}
+
+Συνολικά έχουμε 48 \en{hits} και 176 \en{misses} απο τις οποίες οι 16 είναι \en{compulsory} και 
+οι 160 είναι \en{conflict misses}
+
+\newpage
+Παρατίθεται ο πίνακας διευθυνσιοδοτήσεων για τις δύο πρώτες επαναλήψεις με \en{2-way set-associative cache}
+
+\selectlanguage{english}
+\begin{center}
+\begin{tabularx}{\textwidth}{|Z|Z|Z|Z|Y|Y|Y|Y|}
+\hline
+a[0][0] & b[0][0] & c[0] & a[0][0] & com-m & m & m & m \\
+\hline
+a[0][1] & b[0][1] &      & a[0][1] & h & m & & h \\
+\hline
+a[0][2] & b[0][2] & c[2] & a[0][2] & h & h & m & m \\
+\hline
+a[0][3] & b[0][3] &      & a[0][3] & h & m & & h \\
+\hline
+a[0][4] & b[0][4] & c[4] & a[0][4] & com-m & m & m & m \\
+\hline
+a[0][5] & b[0][5] &      & a[0][5] & h & m & & h \\
+\hline
+a[0][6] & b[0][6] & c[6] & a[0][6] & h & h & m & m \\
+\hline
+a[0][7] & b[0][7] &      & a[0][7] & h & m & & h \\
+\hline
+a[1][0] & b[1][0] & c[8] & a[1][0] & com-m & m & m & m \\
+\hline
+a[1][1] & b[1][1] &      & a[1][1] & h & m & & h \\
+\hline
+a[1][2] & b[1][2] & c[10] & a[1][2] & h & h & m & m \\
+\hline
+a[1][3] & b[1][3] &       & a[1][3] & h & m & & h \\
+\hline
+a[1][4] & b[1][4] & c[12] & a[1][4] & com-m & m & m & m \\
+\hline
+a[1][5] & b[1][5] &       & a[1][5] & h & m & & h \\
+\hline
+a[1][6] & b[1][6] & c[14] & a[1][6] & h & h & m & m \\
+\hline
+a[1][7] & b[1][7] &       & a[1][7] & h & m & & h \\
+\hline
+\end{tabularx}
+\end{center}
+\selectlanguage{greek}
+\vspace{4pt}
+
+Συνολικά έχουμε 96 \en{hits} και 128 \en{misses} από τις οποίες οι 16 είναι \en{compulsory} και οι 112 είναι \en{conflict misses}
+
+Χωρίς να αλλάξουμε τις δηλώσεις, μπορούμε να αλλάξουμε τον κώδικα έτσι ώστε να μην γίνονται \en{fetch} 3 διαφορετικοί πίνακες σε κάθε επανάληψη και έτσι να αποφύγουμε τα περισσότερα \en{conflict misses}:
+
+\selectlanguage{english}
+\begin{center}
+\begin{minted}{c}
+int i, j;
+double a[8][8], b[8][8], c[64];
+
+for (i = 0; i < 8; ++i) {
+    for (j = 0; j < 8; ++j) {
+        a[i][j] = a[i][j] + b[i][j];
+    }
+}
+
+for (i = 0; i < 8 ++i) {
+    for (j = 0; j < 8; j += 2) {
+        a[i][j] = a[i][j] + c[8*i+j];
+    }
+}
+\end{minted}
+\end{center}
+\selectlanguage{greek}
+
+\newpage
+
+Τροποποιώντας τον παραπάνω έτσι ώστε τα δύο \en{loops} να τρέχουν για κάθε \en{block} του \en{cache} ξεχωριστά, αποφεύγουμε να κάνουμε δύο φορές \en{fetch} τον πίνακα $a$:
+
+\selectlanguage{english}
+\begin{center}
+\begin{minted}{c}
+int i, j;
+double a[8][8], b[8][8], c[64];
+
+for (i = 0; i < 8; ++i) {
+    for (j = 0; j < 4; ++j) 
+        a[i][j] = a[i][j] + b[i][j];
+    for (j = 0; j < 4; j += 2) 
+        a[i][j] = a[i][j] + c[8*i+j];
+    for (j = 4; j < 8; ++j)
+        a[i][j] = a[i][j] + b[i][j];
+    for (j = 4; j < 8; j += 2)
+        a[i][j] = a[i][j] + c[8*i+j];
+}
+\end{minted}
+\end{center}
+\selectlanguage{greek}
+
+Παρατίθεται ο πίνακας διευθυνσιοδοτήσεων για την πρώτη επανάληψη για τον παραπάνω κώδικα.
+
+\selectlanguage{english}
+\begin{center}
+\begin{tabularx}{\textwidth}{|Y|Y|Y|Y|Y|Y|}
+\hline
+a[0][0] & b[0][0] & a[0][0] & com-m & m & h \\ 
+\hline
+a[0][1] & b[0][1] & a[0][1] & h & h & h \\ 
+\hline
+a[0][2] & b[0][2] & a[0][2] & h & h & h \\ 
+\hline
+a[0][3] & b[0][3] & a[0][3] & h & h & h \\ 
+\hline
+a[0][0] & c[0]    & a[0][0] & h & m & h \\ 
+\hline
+a[0][2] & c[2]    & a[0][2] & h & h & h \\ 
+\hline
+a[0][4] & b[0][4] & a[0][4] & com-m & m & h \\ 
+\hline
+a[0][5] & b[0][5] & a[0][5] & h & h & h \\ 
+\hline
+a[0][6] & b[0][6] & a[0][6] & h & h & h \\ 
+\hline
+a[0][7] & b[0][7] & a[0][7] & h & h & h \\ 
+\hline
+a[0][4] & c[4]    & a[0][4] & h & m & h \\ 
+\hline
+a[0][6] & c[6]    & a[0][6] & h & h & h \\
+\hline
+\end{tabularx}
+\end{center}
+\selectlanguage{greek}
+\vspace{4pt}
+Συνολικά έχουμε 240 \en{hits} και 48 \en{misses} από τις οποίες οι 16 είναι \en{compulsory} και οι 32 είναι \en{conflict misses}. 
+\end{document}
