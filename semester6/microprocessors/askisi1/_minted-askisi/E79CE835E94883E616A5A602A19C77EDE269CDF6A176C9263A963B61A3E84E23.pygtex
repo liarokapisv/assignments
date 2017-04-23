@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{module} \PYG{n}{askisi334}\PYG{p}{(}\PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{,} \PYG{n+no}{D}\PYG{p}{,} \PYG{n}{Out\PYGZus{}1}\PYG{p}{,}\PYG{n}{Out\PYGZus{}2}\PYG{p}{,} \PYG{n}{Out\PYGZus{}3}\PYG{p}{);}
+    \PYG{k}{input} \PYG{n+no}{A}\PYG{p}{,}\PYG{n+no}{B}\PYG{p}{,}\PYG{n+no}{C}\PYG{p}{,}\PYG{n+no}{D}\PYG{p}{;}
+    \PYG{k}{output} \PYG{n}{Out\PYGZus{}1}\PYG{p}{,} \PYG{n}{Out\PYGZus{}2}\PYG{p}{,} \PYG{n}{Out\PYGZus{}3}\PYG{p}{;}
+    \PYG{k}{assign} \PYG{n}{Out\PYGZus{}1} \PYG{o}{=} \PYG{p}{(}\PYG{n+no}{A} \PYG{o}{|} \PYG{o}{\PYGZti{}}\PYG{n+no}{B}\PYG{p}{)} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{p}{(}\PYG{n+no}{C} \PYG{o}{|} \PYG{n+no}{D}\PYG{p}{);}
+    \PYG{k}{assign} \PYG{n}{Out\PYGZus{}2} \PYG{o}{=} \PYG{p}{((}\PYG{o}{\PYGZti{}}\PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|} \PYG{p}{(}\PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|} \PYG{p}{(}\PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{D}\PYG{p}{))} \PYG{o}{\PYGZam{}} \PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{n+no}{A} \PYG{o}{|} \PYG{n+no}{B}\PYG{p}{);}
+    \PYG{k}{assign} \PYG{n}{Out\PYGZus{}3} \PYG{o}{=} \PYG{p}{(}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{n+no}{B} \PYG{o}{|} \PYG{n+no}{C}\PYG{p}{)} \PYG{o}{\PYGZam{}} \PYG{n+no}{D} \PYG{o}{|} \PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{n+no}{C}\PYG{p}{);}
+\PYG{k}{endmodule}
+\end{Verbatim}

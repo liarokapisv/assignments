@@ -1,0 +1,12 @@
+           IN 10H
+           MVI C,08H ; we loop at most 8 times - once for each bit
+           LDA 2000H 
+ASK1_LOOP: RAL ; we left shift the value
+           JC ASK1_END ; if the uppermost bit was 1 we stop the loop
+           DCR C ; otherwise we decrease the counter
+           JNZ ASK1_LOOP ; and retry
+ASK1_END:  MOV A,C 
+           CMA 
+           STA 3000H 
+           RST 1
+           END

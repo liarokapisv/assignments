@@ -1,0 +1,10 @@
+module askisi7i(D0, D1, D2, D3, x, y, V);
+    input D0, D1, D2, D3;
+    output x, y, V;
+    wire w1, w2;
+    not (w1, D2);
+    or (x, D2, D3);
+    and (w2, w1, D1);
+    or (V, x, D0, D1);
+    or (y, w2, D3);
+endmodule;

@@ -1,0 +1,36 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+        IN 10H
+START:  LDA 2000H
+        CPI 64H
+        JNC BLINK ; if \PYGZgt{} 99 blink leds and restart
+        MVI B,0FFH 
+
+DECA:   INR B
+        SUI 0AH
+        JNC DECA ; if positive keep substracting
+        ADI 0AH ; otherwise we correct the remainder
+                ; at this point A contains the digit in the units positions
+                ; while B contains the digit in the tens position
+        
+        MOV C,A 
+        MOV A,B 
+        RLC
+        RLC
+        RLC
+        RLC ; A now contains the digit in the tens position shifted to the upper 4 bits 
+        ORA C ; we OR A with C so that the digit in the unit position is 
+              ; now contained in the lower 4 bits.
+        CMA
+        STA 3000H ; we now output A to the leds
+        JMP START ; and restart
+
+BLINK:  MVI A,0FH
+        STA 3000H
+        LXI B,01F4H
+        CALL DELB
+        MVI A,0F0H
+        STA 3000H
+        CALL DELB
+        JMP START
+        END
+\end{Verbatim}

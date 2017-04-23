@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+        MVI C, 8 ; we loop at most 8 times \PYGZhy{} once for each bit
+        LDA 2000h ; we assign the input value to the A register
+LOOP:   RAL ; we shift our value to the left, the MSB is assigned to the carry flag
+        JC END ; if the bit is set, we are done
+        DCR C ; otherwise we decrease the counter
+        JNZ LOOP ; and repeat the loop
+END:    MOV A, C ; we assign our counter to the A register
+        CMA ; and compute the complement of A
+        STA 3000h ; then we store it to the 3000h memory address
+        RST 1
+\end{Verbatim}

@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{module} \PYG{n}{askisi6i}\PYG{p}{(}\PYG{n+no}{X}\PYG{p}{,} \PYG{n+no}{Y}\PYG{p}{,} \PYG{n+no}{F}\PYG{p}{);}
+    \PYG{k}{input} \PYG{n+no}{X}\PYG{p}{,} \PYG{n+no}{Y}\PYG{p}{;}
+    \PYG{k}{output} \PYG{n+no}{F}\PYG{p}{;}
+    \PYG{k+kt}{wire} \PYG{n}{w1}\PYG{p}{,} \PYG{n}{w2}\PYG{p}{,} \PYG{n}{w3}\PYG{p}{,} \PYG{n}{w4}\PYG{p}{;}
+    \PYG{k}{not} \PYG{p}{\PYGZsh{}}\PYG{l+m+mh}{4} \PYG{p}{(}\PYG{n}{w1}\PYG{p}{,} \PYG{n+no}{X}\PYG{p}{);}
+    \PYG{k}{not} \PYG{p}{\PYGZsh{}}\PYG{l+m+mh}{4} \PYG{p}{(}\PYG{n}{w2}\PYG{p}{,} \PYG{n+no}{Y}\PYG{p}{);}
+    \PYG{k}{and} \PYG{p}{\PYGZsh{}}\PYG{l+m+mh}{8} \PYG{p}{(}\PYG{n}{w3}\PYG{p}{,} \PYG{n+no}{X}\PYG{p}{,} \PYG{n}{w2}\PYG{p}{);}
+    \PYG{k}{and} \PYG{p}{\PYGZsh{}}\PYG{l+m+mh}{8} \PYG{p}{(}\PYG{n}{w4}\PYG{p}{,} \PYG{n+no}{Y}\PYG{p}{,} \PYG{n}{w1}\PYG{p}{);}
+    \PYG{k}{or} \PYG{p}{\PYGZsh{}}\PYG{l+m+mh}{10} \PYG{p}{(}\PYG{n+no}{F}\PYG{p}{,} \PYG{n}{w3}\PYG{p}{,} \PYG{n}{w4}\PYG{p}{);}
+\PYG{k}{endmodule}
+\end{Verbatim}

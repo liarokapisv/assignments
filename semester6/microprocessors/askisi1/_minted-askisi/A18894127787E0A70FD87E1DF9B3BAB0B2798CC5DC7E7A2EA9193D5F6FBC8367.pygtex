@@ -1,0 +1,44 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{module} \PYG{n}{sxhma320a}\PYG{p}{(}\PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{,} \PYG{n+no}{D}\PYG{p}{,} \PYG{n+no}{F}\PYG{p}{);}
+    \PYG{k}{input} \PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{,} \PYG{n+no}{D}\PYG{p}{;}
+    \PYG{k}{output} \PYG{n+no}{F}\PYG{p}{;}
+    \PYG{k+kt}{wire} \PYG{n}{w1}\PYG{p}{,} \PYG{n}{w2}\PYG{p}{,} \PYG{n}{w3}\PYG{p}{,} \PYG{n}{w4}\PYG{p}{;}
+    \PYG{k}{and} \PYG{p}{(}\PYG{n}{w1}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{,} \PYG{n+no}{D}\PYG{p}{);}
+    \PYG{k}{and} \PYG{p}{(}\PYG{n}{w2}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{,} \PYG{o}{\PYGZti{}}\PYG{n+no}{C}\PYG{p}{);}
+    \PYG{k}{or} \PYG{p}{(}\PYG{n}{w3}\PYG{p}{,} \PYG{n}{w1}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{);}
+    \PYG{k}{and} \PYG{p}{(}\PYG{n}{w4}\PYG{p}{,} \PYG{n}{w3}\PYG{p}{,} \PYG{n+no}{A}\PYG{p}{);}
+    \PYG{k}{or} \PYG{p}{(}\PYG{n+no}{F}\PYG{p}{,} \PYG{n}{w4}\PYG{p}{,} \PYG{n}{w2}\PYG{p}{);}
+\PYG{k}{endmodule}
+
+\PYG{k}{module} \PYG{n}{sxhma321b}\PYG{p}{(}\PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{,} \PYG{n+no}{D}\PYG{p}{,} \PYG{n+no}{F}\PYG{p}{);}
+    \PYG{k}{input} \PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{,} \PYG{n+no}{D}\PYG{p}{;}
+    \PYG{k}{output} \PYG{n+no}{F}\PYG{p}{;}
+    \PYG{k+kt}{wire} \PYG{n}{w1}\PYG{p}{,} \PYG{n}{w2}\PYG{p}{,} \PYG{n}{w3}\PYG{p}{,} \PYG{n}{w4}\PYG{p}{,} \PYG{n}{w5}\PYG{p}{;}
+    \PYG{k}{nand} \PYG{p}{(}\PYG{n}{w1}\PYG{p}{,} \PYG{n+no}{A}\PYG{p}{,} \PYG{o}{\PYGZti{}}\PYG{n+no}{B}\PYG{p}{);}
+    \PYG{k}{nand} \PYG{p}{(}\PYG{n}{w2}\PYG{p}{,} \PYG{o}{\PYGZti{}}\PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{);}
+    \PYG{k}{or} \PYG{p}{(}\PYG{n}{w3}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{,} \PYG{o}{\PYGZti{}}\PYG{n+no}{D}\PYG{p}{);}
+    \PYG{k}{or} \PYG{p}{(}\PYG{n}{w4}\PYG{p}{,} \PYG{o}{\PYGZti{}}\PYG{n}{w1}\PYG{p}{,} \PYG{o}{\PYGZti{}}\PYG{n}{w2}\PYG{p}{);}
+    \PYG{k}{and} \PYG{p}{(}\PYG{n}{w5}\PYG{p}{,} \PYG{n}{w4}\PYG{p}{,} \PYG{n}{w3}\PYG{p}{);}
+    \PYG{k}{not} \PYG{p}{(}\PYG{n+no}{F}\PYG{p}{,} \PYG{n}{w5}\PYG{p}{);}
+\PYG{k}{endmodule}
+
+\PYG{k}{module} \PYG{n}{sxhma324}\PYG{p}{(}\PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{,} \PYG{n+no}{D}\PYG{p}{,} \PYG{n+no}{E}\PYG{p}{,} \PYG{n+no}{F}\PYG{p}{);}
+    \PYG{k}{input} \PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{,} \PYG{n+no}{D}\PYG{p}{,} \PYG{n+no}{E}\PYG{p}{;}
+    \PYG{k}{output} \PYG{n+no}{F}\PYG{p}{;}
+    \PYG{k+kt}{wire} \PYG{n}{w1}\PYG{p}{,} \PYG{n}{w2}\PYG{p}{;}
+    \PYG{k}{or} \PYG{p}{(}\PYG{n}{w1}\PYG{p}{,} \PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{);}
+    \PYG{k}{or} \PYG{p}{(}\PYG{n}{w2}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{,} \PYG{n+no}{D}\PYG{p}{);}
+    \PYG{k}{and} \PYG{p}{(}\PYG{n+no}{F}\PYG{p}{,} \PYG{n}{w1}\PYG{p}{,} \PYG{n}{w2}\PYG{p}{,} \PYG{o}{\PYGZti{}}\PYG{n+no}{E}\PYG{p}{);}
+\PYG{k}{endmodule}
+
+\PYG{k}{module} \PYG{n}{sxhma325}\PYG{p}{(}\PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{,} \PYG{n+no}{D}\PYG{p}{,} \PYG{n+no}{F}\PYG{p}{);}
+    \PYG{k}{input} \PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{,} \PYG{n+no}{D}\PYG{p}{;}
+    \PYG{k}{output} \PYG{n+no}{F}\PYG{p}{;}
+    \PYG{k+kt}{wire} \PYG{n}{w1}\PYG{p}{,} \PYG{n}{w2}\PYG{p}{,} \PYG{n}{w3}\PYG{p}{,} \PYG{n}{w4}\PYG{p}{;}
+    \PYG{k}{and} \PYG{p}{(}\PYG{n}{w1}\PYG{p}{,} \PYG{n+no}{A}\PYG{p}{,} \PYG{o}{\PYGZti{}}\PYG{n+no}{B}\PYG{p}{);}
+    \PYG{k}{and} \PYG{p}{(}\PYG{n}{w2}\PYG{p}{,} \PYG{o}{\PYGZti{}}\PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{);}
+    \PYG{k}{or} \PYG{p}{(}\PYG{n}{w3}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{,} \PYG{o}{\PYGZti{}}\PYG{n+no}{D}\PYG{p}{);}
+    \PYG{k}{or} \PYG{p}{(}\PYG{n}{w4}\PYG{p}{,} \PYG{n}{w1}\PYG{p}{,} \PYG{n}{w2}\PYG{p}{);}
+    \PYG{k}{and} \PYG{p}{(}\PYG{n+no}{F}\PYG{p}{,} \PYG{n}{w4}\PYG{p}{,} \PYG{n}{w3}\PYG{p}{);}
+\PYG{k}{endmodule}
+\end{Verbatim}

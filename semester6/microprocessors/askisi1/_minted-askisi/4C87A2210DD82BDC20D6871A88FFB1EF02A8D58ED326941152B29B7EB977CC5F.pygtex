@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+              IN 10H
+              MVI A,7FH ; 01111111 bit pattern \PYGZhy{} leds would output 10000000
+	      STA 3000H ;
+              MOV D,A ; we store A to D since we will have to reuse A.
+ASK2\PYGZus{}LOOP:    LDA 2000H 
+              MOV C,A ; we store A to C since we will follow up with branching tests
+              ANI 01H
+              JNZ ASK2\PYGZus{}LOOP ; if the LSB is 1 we restart without shifting anything.
+              MOV A,C
+              ANI 80H
+              JNZ ASK2\PYGZus{}RIGHT ; otherwise if the MSB is 1 we shift right and retry.
+              MOV A,D ; otherwise we shift left.
+	      RLC    
+              MOV D,A 
+	      STA 3000H
+	      JMP ASK2\PYGZus{}NEXT 
+ASK2\PYGZus{}RIGHT:   MOV A,D
+	      RRC
+	      MOV D,A
+	      STA 3000H
+ASK2\PYGZus{}NEXT:    LXI B, 01F4H ; called when shifting to create a delay of approximately 500ms.
+              CALL DELB
+              JMP ASK2\PYGZus{}LOOP
+	      END
+\end{Verbatim}
