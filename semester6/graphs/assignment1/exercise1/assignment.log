@@ -1,0 +1,166 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.11.9)  23 APR 2017 19:17
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**../assignment.tex
+(../assignment.tex
+LaTeX2e <2016/02/01>
+Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/assignment/assignment.cls
+Document Class: assignment 2004/07/14 Madhusudan Singh, Copyright (C) 2004
+
+ ==========> Assignment Class (assignment.cls) 2002 <============= 
+ Madhusudan Singh (C) 2004 
+ In case of questions, etc. use comp.text.tex 
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@problem=\count87
+)
+! Undefined control sequence.
+l.3 \class
+          {ŒòŒµœâœÅŒØŒ± ŒìœÅŒ±œÜŒ∑ŒºŒ¨œÑœâŒΩ}
+? q
+OK, entering \batchmode...
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \class{Œ
+            òŒµœâœÅŒØŒ± ŒìœÅŒ±œÜŒ∑ŒºŒ¨œÑœâŒΩ}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no ò in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no µ in font cmr10!
+Missing character: There is no œ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no œ in font cmr10!
+Missing character: There is no Å in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no Ø in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no ± in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no ì in font cmr10!
+Missing character: There is no œ in font cmr10!
+Missing character: There is no Å in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no ± in font cmr10!
+Missing character: There is no œ in font cmr10!
+Missing character: There is no Ü in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no ∑ in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no º in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no ¨ in font cmr10!
+Missing character: There is no œ in font cmr10!
+Missing character: There is no Ñ in font cmr10!
+Missing character: There is no œ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no Ω in font cmr10!
+! Undefined control sequence.
+l.4 \assignment
+               {1Œ∑ Œ£ŒµŒπœÅŒ¨ ŒëœÉŒ∫ŒÆœÉŒµœâŒΩ}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no ∑ in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no £ in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no µ in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no π in font cmr10!
+Missing character: There is no œ in font cmr10!
+Missing character: There is no Å in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no ¨ in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no ë in font cmr10!
+Missing character: There is no œ in font cmr10!
+Missing character: There is no É in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no ∫ in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no Æ in font cmr10!
+Missing character: There is no œ in font cmr10!
+Missing character: There is no É in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no µ in font cmr10!
+Missing character: There is no œ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no Œ in font cmr10!
+Missing character: There is no Ω in font cmr10!
+No file assignment.aux.
+\openout1 = `assignment.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+
+LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10> not available
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 6.
+
+
+! LaTeX Error: File `./exercise1/exercise.tex' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: tex)
+
+ Enter file name: 
+! Emergency stop.
+<read *> 
+         
+l.8 \input{./exercise1/exercise.tex}
+                                    ^^M
+*** (cannot \read from terminal in nonstop modes)
+
+ 
+Here is how much of TeX's memory you used:
+ 296 strings out of 493029
+ 3307 string characters out of 6136234
+ 54019 words of memory out of 5000000
+ 3910 multiletter control sequences out of 15000+600000
+ 4968 words of font info for 18 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 29i,1n,21p,203b,115s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!

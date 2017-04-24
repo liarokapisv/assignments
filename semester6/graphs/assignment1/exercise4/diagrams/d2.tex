@@ -1,0 +1,32 @@
+\documentclass[tikz,border=10pt,convert={density=300,size=1080x800,outext=.png}]{standalone}
+\usetikzlibrary{matrix, positioning, chains, fit, shapes, calc}
+
+\begin{document}
+
+\definecolor{myblue}{RGB}{80,80,160}
+
+\begin{tikzpicture}[thick,
+    every node/.style={draw,circle,minimum size=0.5cm, inner sep=0pt},
+    bnode/.style={fill=myblue},
+    gnode/.style={fill=mygreen},
+    every fit/.style={ellipse,draw,inner sep=4pt,text width=2cm},shorten >= 0pt,shorten <= 0pt
+]
+
+    \begin{scope}
+        \node[bnode] (1) {};
+        \node[bnode,above = 1cm of 1] (2) {};
+        \node[bnode,below left = 1cm and 1cm of 1] (3) {};
+        \node[bnode,below right= 1cm and 1cm of 1] (4) {};
+        \node[bnode, above = 1cm of 2] (5) {};
+    \path
+        (1) edge (3)
+        (1) edge (4)
+        (3) edge (4)
+        (1) edge (2)
+        (2) edge (3)
+        (2) edge (4)
+    ;
+    \end{scope}
+    \end{tikzpicture}
+
+\end{document}
