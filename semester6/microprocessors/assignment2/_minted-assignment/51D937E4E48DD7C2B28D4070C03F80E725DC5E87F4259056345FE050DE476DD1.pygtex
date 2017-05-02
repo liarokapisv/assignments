@@ -1,0 +1,27 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+EXD:
+    LDI 2000H
+    MOV L, A
+    ANI 4
+    JZ EXD\PYGZus{}ND
+    MOV A, D
+    CMA 
+    STA 3000H
+    JMP EXD
+EXD\PYGZus{}ND:
+    MOV A, L
+    ANI 2
+    JZ EXD\PYGZus{}NC
+    MOV A, C
+    CMA
+    STA 3000H
+    JMP EXD
+EXD\PYGZus{}NC:
+    MOV A, L
+    ANI 1
+    JZ EXD
+    MOV A, B
+    CMA
+    STA 3000H
+    JMP EXD
+\end{Verbatim}

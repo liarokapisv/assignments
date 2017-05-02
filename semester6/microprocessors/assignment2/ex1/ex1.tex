@@ -1,0 +1,47 @@
+\newpage \subsection*{Άσκηση 1}
+
+Σε ένα μ-Σ 8085 να γραφεί σε \en{assembly} ένα πρόγραμμα που να επιτελεί τις παρακάτω λειτουργίες:
+\begin{enumerate}[wide, label=\textbf{(\alph*)}]
+\item
+Να αποθηκευθούν οι αριθμοί 0-255 με αύξουσα σειρά στις διαδοχικές θέσεις της μνήμης με αρχή τη
+        διεύθυνση \en{0900H}. Οι αριθμοί
+ να αποθηκευτούν όχι χειροκίνητα αλλα μέσω προγράμματος και να ελέγξετε αν έγινε η ζητούμενη λειτουργία σωστά.
+
+\item
+    Υπολογίστε τον αριθμό των μονάδων των παραπάνω δεδομένων. Το αποτέλεσμα να αποθηκευτεί στον διπλό καταχωρητή \en{BC}.
+
+\item
+    Υπολογίστε το πλήθος από τους παραπάνω αριθμούς (0-255) που είναι μεταξύ των αριθμών \en{10H} και \en{60H}
+        περιλαμβανομένων (\en{10H} $\le x_n \le $ \en{60H}) και φυλάξτε το αποτέλεσμα στον καταχωρητή \en{D}.
+
+\item
+    Όταν γίνεται \en{ON} το \en{LSB} της θύρας εισόδου \en{dip switch} να εμφανίζεται στη θύρα εξόδου των \en{LED} η τιμή του καταχωρητή \en{BC}, αν γίνει \en{ON} το επόμενο από το \en{LSB} των \en{dip switches} ο καταχωρητής \en{C} και με τον αμέσως επόμενο διακόπτη, ο καταχωρητής \en{D}. Στον έλεγχο των διακοπτών, προτεραιότητα να έχει κάθε φορά το υψηλότερης αξίας \en{bit}.
+
+\end{enumerate}
+
+\subsubsection*{Λύση}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+
+
+\item
+    \selectlanguage{english}
+    \inputminted{text}{./ex1/a.8085}
+    \selectlanguage{greek}
+    
+\item
+    \selectlanguage{english}
+    \inputminted{text}{./ex1/b.8085}
+    \selectlanguage{greek}
+        
+\item
+    \selectlanguage{english}
+    \inputminted{text}{./ex1/c.8085}
+    \selectlanguage{greek}
+    
+\item
+    \selectlanguage{english}
+    \inputminted{text}{./ex1/d.8085}
+    \selectlanguage{greek}
+
+\end{enumerate}

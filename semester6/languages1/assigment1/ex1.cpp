@@ -4,21 +4,24 @@
 #include <iostream>
 #include <utility>
 #include <algorithm>
-#include <climits>
+#include <limits>
+#include <fstream>
 
-int main()
+int main(int argc, char* argv[])
 {
-    int n;
-    std::cin >> n;
+    std::ifstream in{argv[1]};
 
-    std::vector<int> elements(n);
-    std::copy_n(std::istream_iterator<int>(std::cin), n, elements.begin());
+    std::size_t n;
+    in >> n;
 
-    std::vector<std::pair<int,int>> left_bounds, right_bounds;
+    std::vector<std::size_t> elements(n);
+    std::copy_n(std::istream_iterator<std::size_t>(in), n, elements.begin());
 
-    int cur_min = INT_MAX;
+    std::vector<std::pair<std::size_t,std::size_t>> left_bounds, right_bounds;
+
+    std::size_t cur_min = std::numeric_limits<std::size_t>::max();
     
-    for (int i = 0; i < elements.size(); ++i)
+    for (std::size_t i = 0; i != elements.size(); ++i)
     {
         if (elements[i] < cur_min)
         {
@@ -27,9 +30,9 @@ int main()
         }
     }
 
-    int cur_max = INT_MIN;
+    std::size_t cur_max = std::numeric_limits<std::size_t>::min();
 
-    for (int i = elements.size()-1; i >= 0; --i)
+    for (std::size_t i = elements.size()-1; i != static_cast<std::size_t>(-1); --i)
     {
         if (elements[i] > cur_max)
         {
@@ -38,10 +41,10 @@ int main()
         }
     }
 
-    int maximum_distance = 0;
-    int li = 0, ri = right_bounds.size()-1;
+    std::size_t maximum_distance = 0;
+    std::size_t li = 0, ri = right_bounds.size()-1;
 
-    while (li < left_bounds.size() && ri >= 0)
+    while (li != left_bounds.size() && ri != static_cast<std::size_t>(-1))
     {
         auto left_bound = left_bounds[li];
         auto right_bound = right_bounds[ri];
@@ -58,6 +61,8 @@ int main()
     }
 
     std::cout << maximum_distance << '\n';
+
+    return 0;
 }
 
 

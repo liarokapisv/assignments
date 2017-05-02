@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+CALL EXC
+HLT
+
+EXC: NOP
+    MVI D, 0
+    LXI B, 0900H
+EXC\PYGZus{}LOOP: NOP
+    LDAX B
+    CPI 10H
+    JM EXC\PYGZus{}SKIP
+    CPI 61H
+    JP EXC\PYGZus{}SKIP
+    INR D
+EXC\PYGZus{}SKIP: NOP
+    INR C
+    MOV A, C
+    CPI 255
+    JNZ EXC\PYGZus{}LOOP
+    RET
+\end{Verbatim}

@@ -1,0 +1,98 @@
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+EXA:      LXI B,0900H
+          MVI A,00H
+
+EXA_LOOP: STAX B
+          INR A
+          INR C
+          JNZ EXA_LOOP
+          RET
+	  
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+EXB:        PUSH D
+            LXI B,0000H
+            LXI H,0000H
+            LXI D,0900H
+            MVI A,00H
+
+EXB_LOOP:   LDAX D
+            CALL COUNT_BITS
+            DAD B
+            INR E
+            MOV A,E
+            CPI 00H
+            JNZ EXB_LOOP
+            MOV C,L
+            MOV B,H
+            POP D
+            RET
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+COUNT_BITS: PUSH D
+            MVI C,00H
+
+CB_LOOP:    CPI 00H
+            JZ CB_END 
+            MOV D,A
+            ANI 01H
+            JZ CB_IF_END
+            INR C
+
+CB_IF_END:  MOV A,D
+            STC
+            CMC
+            RAR
+            JMP CB_LOOP
+
+CB_END:     POP D
+            RET
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+EXC:      MVI D,00H
+          LXI B,0900H
+
+EXC_LOOP: LDAX B
+          CPI 10H
+          JM EXC_SKIP
+          CPI 61H
+          JP EXC_SKIP
+          INR D
+
+EXC_SKIP: INR C
+          MOV A,C
+          CPI 255
+          JNZ EXC_LOOP
+          RET
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+EXD:    LDA 2000H
+        MOV L,A
+        ANI 04H
+        JZ EXD_ND
+        MOV A,D
+        CMA 
+        STA 3000H
+        JMP EXD
+
+EXD_ND: MOV A,L
+        ANI 02H
+        JZ EXD_NC
+        MOV A,C
+        CMA
+        STA 3000H
+        JMP EXD
+
+EXD_NC: MOV A,L
+        ANI 01H
+        JZ EXD
+        MOV A,B
+        CMA
+        STA 3000H
+        JMP EXD
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~

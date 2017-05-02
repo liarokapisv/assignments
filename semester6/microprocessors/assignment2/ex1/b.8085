@@ -1,0 +1,41 @@
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+EXB:        PUSH D
+            LXI B,0000H
+            LXI H,0000H
+            LXI D,0900H
+            MVI A,00H
+
+EXB_LOOP:   LDAX D
+            CALL COUNT_BITS
+            DAD B
+            INR E
+            MOV A,E
+            CPI 00H
+            JNZ EXB_LOOP
+            MOV C,L
+            MOV B,H
+            POP D
+            RET
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+COUNT_BITS: PUSH D
+            MVI C,00H
+
+CB_LOOP:    CPI 00H
+            JZ CB_END 
+            MOV D,A
+            ANI 01H
+            JZ CB_IF_END
+            INR C
+
+CB_IF_END:  MOV A,D
+            STC
+            CMC
+            RAR
+            JMP CB_LOOP
+
+CB_END:     POP D
+            RET
+

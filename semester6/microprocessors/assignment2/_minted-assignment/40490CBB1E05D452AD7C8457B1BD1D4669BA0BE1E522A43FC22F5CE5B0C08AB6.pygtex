@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+;\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}
+
+EXA:      LXI B,0900H
+          MVI A,00H
+
+EXA\PYGZus{}LOOP: STAX B
+          INR A
+          INR C
+          JNZ EXA\PYGZus{}LOOP
+          RET
+	  
+\end{Verbatim}

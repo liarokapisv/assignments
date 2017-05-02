@@ -1,0 +1,51 @@
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+CHECK_INPUT:      MOV A,L
+                  CPI 02H
+                  JZ CHECK_INPUT_S2
+
+CHECK_INPUT_S1:   LXI D,0102H
+                  CALL CHANGE_STATE
+                  RET
+                  
+CHECK_INPUT_S2:   LXI D,0302H
+                  CALL CHANGE_STATE
+                  RET
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+CHANGE_STATE:     LDA 2000H
+                  ANI 01H
+                  JNZ CHANGE_STATE_SET
+                  MOV L,D
+                  RET
+
+CHANGE_STATE_SET: MOV L,E
+                  RET
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+EX2:              LXI H,0001H
+                  MVI A,0FFH
+                  STA 3000H
+                  LXI B,0C8H
+
+EX2_LOOP:         CALL DELB
+                  CALL CHECK_INPUT
+                  MOV A,L
+                  INR H
+                  CPI 03H
+                  JNZ EX2_NOT_DETECTED
+                  MVI H,00H
+                  MVI A,00H
+                  STA 3000H
+
+EX2_NOT_DETECTED: MOV A,H
+                  CPI 0C8H
+                  JNZ EX2_LOOP
+                  MVI H,00HH
+                  MVI A,0FFH
+                  STA 3000H
+                  JMP EX2_LOOP
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

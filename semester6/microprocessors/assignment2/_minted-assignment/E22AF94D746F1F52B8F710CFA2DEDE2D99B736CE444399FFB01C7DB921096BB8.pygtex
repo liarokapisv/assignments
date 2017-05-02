@@ -1,0 +1,42 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+;\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}
+
+EXB:        PUSH D
+            LXI B,0000H
+            LXI H,0000H
+            LXI D,0900H
+            MVI A,00H
+
+EXB\PYGZus{}LOOP:   LDAX D
+            CALL COUNT\PYGZus{}BITS
+            DAD B
+            INR E
+            MOV A,E
+            CPI 00H
+            JNZ EXB\PYGZus{}LOOP
+            MOV C,L
+            MOV B,H
+            POP D
+            RET
+
+;\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}
+
+COUNT\PYGZus{}BITS: PUSH D
+            MVI C,00H
+
+CB\PYGZus{}LOOP:    CPI 00H
+            JZ CB\PYGZus{}END 
+            MOV D,A
+            ANI 01H
+            JZ CB\PYGZus{}IF\PYGZus{}END
+            INR C
+
+CB\PYGZus{}IF\PYGZus{}END:  MOV A,D
+            STC
+            CMC
+            RAR
+            JMP CB\PYGZus{}LOOP
+
+CB\PYGZus{}END:     POP D
+            RET
+\end{Verbatim}

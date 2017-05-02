@@ -1,0 +1,11 @@
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+EXA:      LXI B,0900H
+          MVI A,00H
+
+EXA_LOOP: STAX B
+          INR A
+          INR C
+          JNZ EXA_LOOP
+          RET
+	  

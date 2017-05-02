@@ -1,0 +1,28 @@
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+EXD:    LDA 2000H
+        MOV L,A
+        ANI 04H
+        JZ EXD_ND
+        MOV A,D
+        CMA 
+        STA 3000H
+        JMP EXD
+
+EXD_ND: MOV A,L
+        ANI 02H
+        JZ EXD_NC
+        MOV A,C
+        CMA
+        STA 3000H
+        JMP EXD
+
+EXD_NC: MOV A,L
+        ANI 01H
+        JZ EXD
+        MOV A,B
+        CMA
+        STA 3000H
+        JMP EXD
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,0 +1,30 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+;\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}
+
+EXD:    LDA 2000H
+        MOV L,A
+        ANI 04H
+        JZ EXD\PYGZus{}ND
+        MOV A,D
+        CMA 
+        STA 3000H
+        JMP EXD
+
+EXD\PYGZus{}ND: MOV A,L
+        ANI 02H
+        JZ EXD\PYGZus{}NC
+        MOV A,C
+        CMA
+        STA 3000H
+        JMP EXD
+
+EXD\PYGZus{}NC: MOV A,L
+        ANI 01H
+        JZ EXD
+        MOV A,B
+        CMA
+        STA 3000H
+        JMP EXD
+
+;\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}
+\end{Verbatim}

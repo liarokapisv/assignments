@@ -1,0 +1,18 @@
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+EXC:      MVI D,00H
+          LXI B,0900H
+
+EXC_LOOP: LDAX B
+          CPI 10H
+          JM EXC_SKIP
+          CPI 61H
+          JP EXC_SKIP
+          INR D
+
+EXC_SKIP: INR C
+          MOV A,C
+          CPI 255
+          JNZ EXC_LOOP
+          RET
+

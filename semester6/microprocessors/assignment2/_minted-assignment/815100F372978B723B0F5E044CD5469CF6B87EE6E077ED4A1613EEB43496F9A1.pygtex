@@ -1,0 +1,55 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+CHECK\PYGZus{}INPUT:
+    MOV A, L
+    CPI 1:
+    JZ CHECK\PYGZus{}INPUT\PYGZus{}S1
+
+    MOV A, L
+    CPI 2
+    JZ CHECK\PYGZus{}INPUT\PYGZus{}S2
+
+    MOV A, L
+    CPI 3
+    JZ CHECK\PYGZus{}INPUT\PYGZus{}S3
+
+    RET
+
+CHECK\PYGZus{}INPUT\PYGZus{}S1:
+    MVI B, 1
+    MVI C, 2
+    CALL CHANGE\PYGZus{}STATE
+    RET
+    
+CHECK\PYGZus{}INPUT\PYGZus{}S2:
+    MVI B, 3
+    MVI C, 2
+    CALL CHANGE\PYGZus{}STATE
+    RET
+
+CHECK\PYGZus{}INPUT\PYGZus{}S3:
+    MVI B, 1
+    MVI C, 2
+    CALL CHANGE\PYGZus{}STATE
+    RET
+
+EX2:
+    MVI H, 0 ; timer
+    MVI L, 1 ; state
+    LXI B, 200
+    CALL DELB
+    CALL CHECK\PYGZus{}INPUT
+    MOV A, L
+    INR H
+    CPI 3
+    JNZ EX2\PYGZus{}NOT\PYGZus{}DETECTED
+    MVI H, 0
+    MVI 3000H, 0
+EX2\PYGZus{}NOT\PYGZus{}DETECTED:
+    MOV A, H
+    CPI 200
+    JNZ EX2
+    MVI H, 0
+    MVI 3000H, 0FFH
+    JMP EX2
+    
+\end{Verbatim}

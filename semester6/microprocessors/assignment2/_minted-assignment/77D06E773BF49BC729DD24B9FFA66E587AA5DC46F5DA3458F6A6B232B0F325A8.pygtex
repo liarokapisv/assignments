@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+;\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}
+
+EXC:      MVI D,00H
+          LXI B,0900H
+
+EXC\PYGZus{}LOOP: LDAX B
+          CPI 10H
+          JM EXC\PYGZus{}SKIP
+          CPI 61H
+          JP EXC\PYGZus{}SKIP
+          INR D
+
+EXC\PYGZus{}SKIP: INR C
+          MOV A,C
+          CPI 255
+          JNZ EXC\PYGZus{}LOOP
+          RET
+\end{Verbatim}
