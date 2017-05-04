@@ -17,14 +17,8 @@ std::vector<std::string> read_input(std::string name)
     
     std::string line;
 
-    std::size_t n;
-    in >> n;
-    
-    std::getline(in, line);
-
-    for (std::size_t i = 0; i != n; ++i)
+    while (std::getline(in, line))
     {
-        std::getline(in, line);
         space.push_back(std::move(line));
     }
 
@@ -37,25 +31,26 @@ using path_info = std::pair<Distance, std::vector<Node>>;
 template <typename Distance, typename Node, typename GetNeighbors, typename GetDistance, typename Visit, typename HasVisited>
 path_info<Distance, Node> bfs_shortest_path(Distance weight_limit, Node start, Node target, Visit visit, HasVisited has_visited, GetNeighbors get_neighbors, GetDistance get_distance)
 {
-    std::vector<std::queue<std::pair<Node, path_info<Distance, Node>>>> to_visit_neighbors(weight_limit+1);
+    std::vector<std::vector<std::pair<Node, path_info<Distance, Node>>>> to_visit_neighbors(weight_limit+1);
 
-    to_visit_neighbors[0].push({start, {0, {start}}});
+    to_visit_neighbors[0].push_back({start, {0, {start}}});
 
     while (std::any_of(to_visit_neighbors.begin(), to_visit_neighbors.end(), 
-                [](const std::queue<std::pair<Node, path_info<Distance, Node>>>& q) { return !q.empty(); }))
+                [](const std::vector<std::pair<Node, path_info<Distance, Node>>>& q) { return !q.empty(); }))
     {
         auto& cur_visit = to_visit_neighbors[0];
         
         while (!cur_visit.empty())
         {
-            auto cur_node = cur_visit.front(); cur_visit.pop();
+            auto cur_node = cur_visit.back(); cur_visit.pop_back();
 
             if (!has_visited(cur_node.first))
                 visit(cur_node.first) = cur_node.second;
             else
                 continue;
 
-            if (cur_node.first == target) break;
+            if (cur_node.first == target)
+                return visit(target);
 
             for (const auto& neighbor : get_neighbors(cur_node.first))
             {
@@ -66,7 +61,7 @@ path_info<Distance, Node> bfs_shortest_path(Distance weight_limit, Node start, N
                     
                     auto distance = get_distance(cur_node.first, neighbor);
 
-                    to_visit_neighbors[distance].push({neighbor, {cur_path.first + distance, cur_path.second}});
+                    to_visit_neighbors[distance].push_back({neighbor, {cur_path.first + distance, cur_path.second}});
                 }
                 
             }
@@ -137,7 +132,8 @@ int main(int argc, char* argv[])
         return 1;
     };
 
-    std::vector<path_info<std::size_t, node_t>> paths(2*height*width, {static_cast<std::size_t>(-1), {}});
+    std::vector<path_info<std::size_t, node_t>> paths(2*height*width, 
+            {std::numeric_limits<std::size_t>::max(), {}});
     
     auto visit = [&paths, height, width](const node_t& node) -> path_info<std::size_t, node_t>&
     {
@@ -146,7 +142,7 @@ int main(int argc, char* argv[])
 
     auto has_visited = [&visit](const node_t& node)
     {
-        return visit(node).first != static_cast<std::size_t>(-1);
+        return visit(node).first != std::numeric_limits<std::size_t>::max();
     };
 
     auto result = bfs_shortest_path(2, start_pos, end_pos, visit, has_visited, get_neighbors, get_distance);
@@ -154,6 +150,7 @@ int main(int argc, char* argv[])
     auto shortest_distance = result.first;
 
     std::string directions;
+    directions.reserve(shortest.path.size());
 
     auto to_direction = [](const node_t& node1, const node_t& node2)
     {
