@@ -1,16 +1,17 @@
-type Node = bool * int * int
-type PathInfo = (int * Node list) Vector.vector
-type Contents = char Vector.vector
 
-fun boundsCheck (height, width) (y,x) = 
-  y >= 0 andalso y < height andalso x >= 0 andalso x < width
+(* Used to access the geometry *)
 
 fun accessSpace vec (y,x) =
   String.sub(Vector.sub(vec, y), x)
 
-fun neighbors bounds space (z, y,x) =
+
+(* Returns the neighbors of a single node *)
+
+fun neighbors (height, width) space (z, y,x) =
 let 
-  fun valid (z,y,x) = boundsCheck bounds (y,x) andalso accessSpace space (y,x) <> #"X"
+  fun boundsCheck (y,x) = 
+    y >= 0 andalso y < height andalso x >= 0 andalso x < width
+  fun valid (z,y,x) = boundsCheck (y,x) andalso accessSpace space (y,x) <> #"X"
   val neighbs = List.filter valid [(z,y,x-1),(z,y,x+1),(z,y-1,x),(z,y+1,x)];
   val neighbsWithCost = if z = false
                           then map (fn c => (2, c)) neighbs
@@ -19,6 +20,9 @@ in
   if accessSpace space (y,x) = #"W" then (1, (not z, y, x)) :: neighbsWithCost
   else neighbsWithCost
 end
+
+
+(* Returns the position of a node that satisfies the given predicate *)
 
 fun searchFor (height, width) vec c =
 let
@@ -34,17 +38,38 @@ in
   searchForRow c 0
 end
 
+
+(* Used to retrieve the info regarding the best path to a given node *)
+
 fun accessInfo (height, width) vec (z,y,x) =
   if z then Vector.sub(vec, height*width + y*width + x)
   else Vector.sub(vec, y*width + x)
+
+
+(* Used to update the info regarding the best path of a given node *)
 
 fun update (height, width) vec (z,y,x) new =
   if z then Vector.update(vec, height*width + y*width + x, new)
   else Vector.update(vec, y*width + x, new)
 
-fun visited bounds info pos = (#1 (accessInfo bounds info pos : int * Node list)) <> Option.valOf Int.maxInt
+
+(* Checks if we have found the best path to a given node *)
+
+fun visited bounds info pos = (#1 (accessInfo bounds info pos : int * (bool * int * int) list)) <> Option.valOf Int.maxInt
+
+
+(* Creates an empty vector that will contain the info regarding the best path to
+ * each node *)
 
 fun empty (height, width) = Vector.tabulate (2*height*width, fn _ => (Option.valOf Int.maxInt, []))
+
+
+(* This is the function that does most of the work.
+ * The logic behind the function is that given all visited nodes, all nodes with best
+ * distance i and some nodes with best distance (i+1), it's possible to find all nodes
+ * of best distance (i+1) and some nodes of best distance (i+2). In general, this can be
+ * further generalized to a O(k*n) algorithm where n is the number of nodes 
+ * and k is the the max weight of the graph divided by the gcd of all weights. *)
 
 fun solveProblem neighbors visited update empty start = 
 let 
@@ -72,6 +97,10 @@ in
   result
 end
 
+
+(* Handles the file reading, returns the bounds and the vector representing our
+ * geometry *)
+
 fun readfile name = 
 let
   val infile = TextIO.openIn name
@@ -84,6 +113,9 @@ let
 in
   (bounds, Vector.fromList contents)
 end
+
+
+(* Converts adjacent nodes to a direction character *)
 
 fun toDirections path = 
 let
