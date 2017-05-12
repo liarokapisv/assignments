@@ -28,11 +28,14 @@ public:
     class const_iterator : public std::iterator<std::forward_iterator_tag, const node_t, std::ptrdiff_t, const node_t*, const node_t&>
 
     {
+        friend path_iterable;
+
     private:
         const path_iterable* _parent;
         const node_t* _data;
         
         const_iterator(const path_iterable* parent, const node_t* data) : _parent{parent}, _data{data} {}
+
     public:
         const_iterator() : const_iterator{nullptr, nullptr} {}
         const_iterator(const const_iterator& o) : _parent{o._parent}, _data{o._data} {}
