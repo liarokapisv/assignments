@@ -1,4 +1,0 @@
-(* ex2.mlb *)
-$(SML_LIB)/smlnj-lib/Util/smlnj-lib.mlb
-$(SML_LIB)/basis/basis.mlb
-ex2.sml
