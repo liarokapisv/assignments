@@ -1,0 +1,51 @@
+\documentclass[tikz,border=10pt,convert={density=300,size=1080x800,outext=.png}]{standalone}
+\usetikzlibrary{matrix, positioning, chains, fit, shapes, calc}
+
+\begin{document}
+
+\definecolor{myblue}{RGB}{80,80,160}
+
+\begin{tikzpicture}[thick,
+    every node/.style={draw,circle,minimum size=0.5cm, inner sep=0pt},
+    bnode/.style={fill=myblue},
+    gnode/.style={fill=mygreen},
+    every fit/.style={ellipse,draw,inner sep=4pt,text width=2cm},shorten >= 0pt,shorten <= 0pt
+]
+
+    \begin{scope}
+
+        \node[bnode] (l) {};
+        \node[bnode, above left = 1cm of l] (la) {};
+        \node[bnode, below left = 1cm of l] (lb) {};
+        \node[bnode, left = 1cm of l] (ll) {};
+        \node[bnode, left = 1cm of ll] (lll) {};
+
+        \node[bnode, right = 1cm of l] (r) {};
+        \node[bnode, above right = 1cm of r] (ra) {};
+        \node[bnode, below right = 1cm of r] (rb) {};
+        \node[bnode, right = 1cm of r] (rr) {};
+        \node[bnode, right = 1cm of rr] (rrr) {};
+
+    \path
+        (l) edge (r)
+        (l) edge (la)
+        (l) edge (lb)
+        (ll) edge (la)
+        (ll) edge (lb)
+        (ll) edge (lll)
+        (lll) edge (la)
+        (lll) edge (lb)
+
+        (r) edge (r)
+        (r) edge (ra)
+        (r) edge (rb)
+        (rr) edge (ra)
+        (rr) edge (rb)
+        (rr) edge (rrr)
+        (rrr) edge (ra)
+        (rrr) edge (rb);
+    \end{scope}
+    \end{tikzpicture}
+
+\end{document}
+
