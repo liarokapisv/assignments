@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{n}{antennaLocs} \PYG{o+ow}{::} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]}
+    \PYG{n}{antennaLocs} \PYG{o+ow}{=} \PYG{n}{antennaLocs\PYGZsq{}} \PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{radious}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+        \PYG{k+kr}{where} \PYG{n}{antennaLocs\PYGZsq{}} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]}
+              \PYG{n}{antennaLocs} \PYG{k+kr}{\PYGZus{}} \PYG{k+kt}{[]} \PYG{k+kr}{\PYGZus{}} \PYG{o+ow}{=} \PYG{k+kt}{[]}
+              \PYG{n}{antennaLocs} \PYG{n}{leftestCoord} \PYG{p}{(}\PYG{n}{hc} \PYG{k+kt}{:} \PYG{n}{rest}\PYG{p}{)} \PYG{n}{radius}
+                \PYG{o}{|} \PYG{n}{hc} \PYG{o}{\PYGZhy{}} \PYG{n}{leftestCoord} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{2} \PYG{o}{*} \PYG{n}{radius} \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{hc} \PYG{o}{+} \PYG{n}{radius}\PYG{p}{)} \PYG{k+kt}{:} \PYG{n}{antennaLocs} \PYG{n}{hc} \PYG{n}{rest} \PYG{n}{radius}
+                \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{n}{antennaLocs} \PYG{n}{leftestCoord} \PYG{n}{rest} \PYG{n}{radius}
+\end{Verbatim}

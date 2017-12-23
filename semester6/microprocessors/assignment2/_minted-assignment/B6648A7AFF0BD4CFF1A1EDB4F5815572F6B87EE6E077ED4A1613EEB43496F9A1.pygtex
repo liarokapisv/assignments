@@ -1,0 +1,53 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+;\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}
+
+CHECK\PYGZus{}INPUT:      MOV A,L
+                  CPI 02H
+                  JZ CHECK\PYGZus{}INPUT\PYGZus{}S2
+
+CHECK\PYGZus{}INPUT\PYGZus{}S1:   LXI D,0102H
+                  CALL CHANGE\PYGZus{}STATE
+                  RET
+                  
+CHECK\PYGZus{}INPUT\PYGZus{}S2:   LXI D,0302H
+                  CALL CHANGE\PYGZus{}STATE
+                  RET
+
+;\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}
+
+CHANGE\PYGZus{}STATE:     LDA 2000H
+                  ANI 01H
+                  JNZ CHANGE\PYGZus{}STATE\PYGZus{}SET
+                  MOV L,D
+                  RET
+
+CHANGE\PYGZus{}STATE\PYGZus{}SET: MOV L,E
+                  RET
+
+;\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}
+
+EX2:              LXI H,0001H
+                  MVI A,0FFH
+                  STA 3000H
+                  LXI B,0C8H
+
+EX2\PYGZus{}LOOP:         CALL DELB
+                  CALL CHECK\PYGZus{}INPUT
+                  MOV A,L
+                  INR H
+                  CPI 03H
+                  JNZ EX2\PYGZus{}NOT\PYGZus{}DETECTED
+                  MVI H,00H
+                  MVI A,00H
+                  STA 3000H
+
+EX2\PYGZus{}NOT\PYGZus{}DETECTED: MOV A,H
+                  CPI 0C8H
+                  JNZ EX2\PYGZus{}LOOP
+                  MVI H,00HH
+                  MVI A,0FFH
+                  STA 3000H
+                  JMP EX2\PYGZus{}LOOP
+
+;\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}
+\end{Verbatim}

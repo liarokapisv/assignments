@@ -1,0 +1,26 @@
+\newpage
+
+\subsubsection*{Άσκηση 4}
+
+1. Ο αλγόριθμος είναι \en{greedy} φύσεως, παίρνει ως είσοδο μία λίστα απο $x$-συντεταγμένες σπιτιών και την ακτίνα
+των κεραιών και επιστρέφει μία λίστα απο $x$-συντεταγμένες κεραιών:
+
+\selectlanguage{english}
+\begin{minted}{haskell}
+    antennaLocs :: [Int] -> Int -> [Int]
+    antennaLocs = antennaLocs' (-2*radious-1)
+        where antennaLocs' :: Int -> [Int] -> Int -> [Int]
+              antennaLocs _ [] _ = []
+              antennaLocs leftestCoord (hc : rest) radius 
+                | hc - leftestCoord > 2 * radius = (hc + radius) : antennaLocs hc rest radius
+                | otherwise = antennaLocs leftestCoord rest radius
+
+\end{minted}
+\selectlanguage{greek}
+
+Ο παραπάνω αλγόριθμος έχει πολυπλοκότητα $O(n)$.
+
+2. Ο αλγόριθμος του πρώτου μέρους βασίζεται στο ότι υπάρχει μία καθορισμένη αρχή στην διάταξη των σπιτιών.
+Σε έναν κύκλο ωστόσο μπορεί να υπάρχει επικάλυψη της τελικής και της αρχικής κεραίας και έτσι δεν υπάρχει εύκολος τρόπος
+επιλογής αρχής. Ένας τρόπος επίλυσης είναι να διαλέξουμε κάθε σπίτι ως αρχή και να διαλέξουμε αυτην για την οποία ελαχιστοποιείται 
+ο αριθμός των κεραιών σύμφωνα με τον παραπάνω αλγόριθμο. Αυτός ο αλγόριθμος έχει πολυπλοκότητα $O(n^2)$.

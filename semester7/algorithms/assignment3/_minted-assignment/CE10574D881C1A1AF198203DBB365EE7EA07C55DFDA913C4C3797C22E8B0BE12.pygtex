@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{maximizeAssignment} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{n}{n} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{SortedSet} \PYG{k+kt}{Satellite} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{SortedSet} \PYG{k+kt}{Planet}
+                            \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Map} \PYG{k+kt}{Satellite} \PYG{k+kt}{Planet}
+\PYG{n+nf}{maximizeAssignment} \PYG{n}{satellites} \PYG{n}{planets} \PYG{o+ow}{=}
+    \PYG{k+kr}{let}
+        \PYG{n}{planetWithMaxValue} \PYG{o+ow}{=} \PYG{n}{getMax} \PYG{n}{planets}
+        \PYG{n}{satelliteJustAboveShield} \PYG{o+ow}{=} \PYG{n}{getJustAbove} \PYG{p}{(}\PYG{n}{shield} \PYG{n}{planetWithMaxValue}\PYG{p}{)} \PYG{n}{satellite}
+    \PYG{k+kr}{in}
+        \PYG{k+kr}{case} \PYG{n}{satelliteJustAboveShield} \PYG{k+kr}{of}
+            \PYG{k+kt}{Just} \PYG{n}{satellite} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{\PYGZob{}} \PYG{n}{satellite} \PYG{o+ow}{=\PYGZgt{}} \PYG{n}{planetWithMaxValue} \PYG{p}{\PYGZcb{}} \PYG{k+kt}{U}
+                    \PYG{n}{maximizeAssignment} \PYG{p}{(}\PYG{n}{satellites} \PYG{o}{\PYGZhy{}} \PYG{n}{satellite}\PYG{p}{)}
+                                       \PYG{p}{(}\PYG{n}{planets} \PYG{o}{\PYGZhy{}} \PYG{n}{planetWithMaxValue}\PYG{p}{)}
+            \PYG{k+kt}{Nothing} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kr}{let}
+                           \PYG{n}{satelliteWithMinPower} \PYG{o+ow}{=} \PYG{n}{getMin} \PYG{n}{satellites}
+                       \PYG{k+kr}{in}
+                           \PYG{n}{maximizeAssignment} \PYG{p}{(}\PYG{n}{satellites} \PYG{o}{\PYGZhy{}} \PYG{n}{satelliteWithMinPower}\PYG{p}{)}
+                                              \PYG{p}{(}\PYG{n}{planets} \PYG{o}{\PYGZhy{}} \PYG{n}{planetWithMaxValue}\PYG{p}{)}
+\end{Verbatim}

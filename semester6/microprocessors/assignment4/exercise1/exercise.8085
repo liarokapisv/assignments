@@ -1,0 +1,63 @@
+IN 10H
+LXI H,0B00H
+MVI M,10H
+INX H
+MVI M,10H
+INX H
+MVI M,10H
+INX H
+MVI M,10H
+LXI B,03E8H 
+
+START:    NOP
+          MVI A,0DH
+          SIM
+          EI
+WAIT:     NOP
+          JMP WAIT
+INTR_ROUTINE: NOP
+          POP H
+          MVI A,00H
+          STA 3000H
+          EI
+          MVI E,3CH 
+MYCOUNT:  NOP
+          MOV A,E
+          DCR A
+          MOV E,A
+          CPI FFH
+          JNZ MYDISPLAY
+          MVI A,FFH
+          STA 3000H        
+          JMP WAIT
+MYDISPLAY: NOP
+          LXI H,0B04H 
+          MVI D,00H 
+XD_DEC:   NOP
+          CPI 0AH
+          JC XD_CONT
+          INR D
+          SUI 0AH 
+          JMP XD_DEC
+XD_CONT:  NOP
+          ANI 0FH        
+          MOV M,A        
+          INX H                
+          MOV A,D         
+          ANI 0FH        
+          MOV M,A          
+          
+          PUSH B
+          PUSH D
+          PUSH PSW
+          LXI D,0B00H
+          CALL STDM
+          CALL DCD
+          DI
+          CALL DELB
+          EI
+          POP PSW
+          POP D
+          POP B
+          JMP MYCOUNT
+END

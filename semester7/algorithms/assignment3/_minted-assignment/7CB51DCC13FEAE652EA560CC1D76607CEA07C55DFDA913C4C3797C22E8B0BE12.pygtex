@@ -1,0 +1,32 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{//}\PYG{n}{checks} \PYG{k+kr}{if} \PYG{n}{limits} \PYG{n}{describe} \PYG{n}{the} \PYG{n}{base} \PYG{k+kr}{case}
+\PYG{n+nf}{isTwoByTwo} \PYG{o+ow}{::} \PYG{k+kt}{Limits} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}
+
+\PYG{o}{//}\PYG{n}{puts} \PYG{n}{puzzle} \PYG{n}{piece} \PYG{n}{on} \PYG{n}{given} \PYG{n}{adjacent} \PYG{n}{points}
+\PYG{n+nf}{fillPoints} \PYG{o+ow}{::} \PYG{k+kt}{Puzzle} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{k+kt}{Point}\PYG{p}{,} \PYG{k+kt}{Point}\PYG{p}{,} \PYG{k+kt}{Point}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Puzzle}
+
+\PYG{o}{//}\PYG{n}{splits} \PYG{n}{limits} \PYG{n}{to} \PYG{n}{four} \PYG{n}{quadrants}
+\PYG{n+nf}{splitToQuadrants} \PYG{o+ow}{::} \PYG{k+kt}{Limits} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{k+kt}{Limits}\PYG{p}{,} \PYG{k+kt}{Limits}\PYG{p}{,} \PYG{k+kt}{Limits}\PYG{p}{,} \PYG{k+kt}{Limits}\PYG{p}{)}
+
+\PYG{o}{//}\PYG{n}{returns} \PYG{n}{fake} \PYG{n}{forbiddens} \PYG{n}{for} \PYG{n}{all} \PYG{n}{quadtrants}\PYG{p}{,} \PYG{n}{first} \PYG{n}{limits} \PYG{n}{is}
+\PYG{o}{//}\PYG{n}{given} \PYG{n}{forbidden\PYGZsq{}s} \PYG{n}{quadrant}\PYG{o}{.} \PYG{k+kt}{The} \PYG{n}{forbiddens} \PYG{n}{are} \PYG{n}{adjacent}\PYG{o}{.}
+\PYG{n+nf}{getMockForbiddens} \PYG{o+ow}{::} \PYG{k+kt}{Point} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{k+kt}{Limits}\PYG{p}{,} \PYG{k+kt}{Limits}\PYG{p}{,} \PYG{k+kt}{Limits}\PYG{p}{,} \PYG{k+kt}{Limits}\PYG{p}{)}
+                           \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{k+kt}{Limits}\PYG{p}{,} \PYG{p}{(}\PYG{k+kt}{Limits}\PYG{p}{,}\PYG{k+kt}{Point}\PYG{p}{),} \PYG{p}{(}\PYG{k+kt}{Limits}\PYG{p}{,}\PYG{k+kt}{Point}\PYG{p}{),} \PYG{p}{(}\PYG{k+kt}{Limits}\PYG{p}{,}\PYG{k+kt}{Point}\PYG{p}{))}
+
+\PYG{n+nf}{fillPuzzle} \PYG{o+ow}{::} \PYG{k+kt}{Puzzle} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Limits} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Point} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Puzzle}
+\PYG{n+nf}{fillPuzzle} \PYG{n}{puzzle} \PYG{n}{limits} \PYG{n}{forbidden}
+    \PYG{o}{|} \PYG{n}{isTwoByTwo} \PYG{n}{limits} \PYG{o+ow}{=} \PYG{o}{..} \PYG{o}{//}\PYG{n}{base} \PYG{k+kr}{case}
+    \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=}
+        \PYG{k+kr}{let}
+          \PYG{n}{quadrants} \PYG{o+ow}{=} \PYG{n}{splitToQuadrants} \PYG{n}{limits} \PYG{n}{forbidden}
+          \PYG{p}{(}\PYG{n}{limitsOfForbidden}\PYG{p}{,}
+            \PYG{p}{(}\PYG{n}{limitsa}\PYG{p}{,} \PYG{n}{forbiddena}\PYG{p}{),}
+            \PYG{p}{(}\PYG{n}{limitsb}\PYG{p}{,} \PYG{n}{forbiddenb}\PYG{p}{),}
+            \PYG{p}{(}\PYG{n}{limitsc}\PYG{p}{,} \PYG{n}{forbiddenc}\PYG{p}{))} \PYG{o+ow}{=} \PYG{n}{getMockForbiddens} \PYG{n}{forbidden} \PYG{n}{quadrants}
+          \PYG{n}{filledOfForbbiden} \PYG{o+ow}{=} \PYG{n}{fillPuzzle} \PYG{n}{puzzle} \PYG{n}{limitsOfForbidden} \PYG{n}{forbidden}
+          \PYG{n}{andFilledA} \PYG{o+ow}{=} \PYG{n}{fillPuzzle} \PYG{n}{filledOfForbbiden} \PYG{n}{limitsa} \PYG{n}{forbiddena}
+          \PYG{n}{andFilledB} \PYG{o+ow}{=} \PYG{n}{fillPuzzle} \PYG{n}{andFilledA} \PYG{n}{limitsb} \PYG{n}{forbiddenb}
+          \PYG{n}{andFilledC} \PYG{o+ow}{=} \PYG{n}{fillPuzzle} \PYG{n}{andFilledB} \PYG{n}{limitsc} \PYG{n}{forbiddenc}
+        \PYG{k+kr}{in}
+          \PYG{n}{putPiece} \PYG{n}{andFilledC} \PYG{p}{(}\PYG{n}{forbiddena}\PYG{p}{,} \PYG{n}{forbiddenb}\PYG{p}{,} \PYG{n}{forbiddenc}\PYG{p}{)}
+\end{Verbatim}

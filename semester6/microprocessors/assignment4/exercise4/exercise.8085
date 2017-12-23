@@ -1,0 +1,60 @@
+					
+
+MVI A,0EH				
+					
+SIM
+LXI H,0000H
+MVI B,40H				
+LXI D,0000H				
+MVI C,00H				
+
+EI 					
+
+LOOP: NOP
+	CALL RST5.5_ROUTINE
+	MOV A,B
+	
+	ANI A,01H
+	CMP 01H
+	JZ ODD
+EVEN: NOP					
+	MOV D,E				
+	CALL RST5.5_ROUTINE
+	JMP CHECK_COUNTER
+	
+ODD: NOP					
+	MOV A,E
+	RLC				
+	RLC
+	RLC
+	RLC
+	ORA D				
+	MOV E,A
+	MOV D,00H			
+	DAD D				
+
+CHECK_COUNTER: NOP
+	
+	MOV A,B
+	CPI 0
+	JNZ LOOP
+
+	DI				
+
+AVERAGE: NOP
+	
+	DAD H				
+	DAD H
+HTL
+
+
+RST5.5_ROUTINE: NOP
+
+	PUSH PSW
+	IN PORT-IN
+	MOV D,00H
+	MOV E,A
+	DCR B
+	POP PSW
+	EI
+	RET				

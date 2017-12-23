@@ -1,0 +1,68 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+					;Κυρίως πρόγραμμα
+
+MVI A,0EH				;αρχικοποίηση καταχωρητών και μάσκας διακοπών
+					;
+SIM
+LXI H,0000H
+MVI B,40H				;B είναι ο μετρητής των βημάτων
+LXI D,0000H				;(D) = 00H, (E) = 00H
+MVI C,00H				;(C) = 00H
+
+EI 					;ενεργοποιούμε τις διακοπές
+
+
+					;επανάληψη 64 βημάτων
+
+LOOP:
+	CALL RST5.5\PYGZus{}ROUTINE
+	MOV A,B
+	
+	ANI A,01H
+	CMP 01H
+	JZ ODD
+EVEN:					;όταν το (B)mod2 ισούται με 0 παίρνουμε τα 4 LSBs
+	MOV D,E				
+	CALL RST5.5\PYGZus{}ROUTINE
+	JMP CHECK\PYGZus{}COUNTER
+	
+ODD:					;όταν το (B)mod2 ισούται 1 παίρνουμε τα 4 MSBs
+	MOV A,E
+	RLC				;4 περιστροφές
+	RLC
+	RLC
+	RLC
+	ORA D				;έχουμε σοτ συσσωρευτή τα 4MSBs και τα 4LSBs του αριθμού
+	MOV E,A
+	MOV D,00H			;ο καταχωρητής E περιέχει τον αριθμό 
+	DAD D				;συνολικό άθροισμα, (H\PYGZhy{}L) = (H\PYGZhy{}L) + (D\PYGZhy{}E)
+
+
+CHECK\PYGZus{}COUNTER:
+	
+	MOV A,B
+	CPI 0
+	JNZ LOOP
+
+	DI				;απενεργοποιούμε τις διακοπές
+
+AVERAGE:
+	
+	DAD H				;περιστροφή προς τα αριστερά
+	DAD H
+HTL
+
+
+
+
+RST5.5\PYGZus{}ROUTINE:
+
+	PUSH PSW
+	IN PORT\PYGZhy{}IN
+	MOV D,00H
+	MOV E,A
+	DCR B
+	POP PSW
+	EI
+	RET				;πίσω στο κυρίως πρόγραμμα
+\end{Verbatim}

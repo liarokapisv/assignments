@@ -1,0 +1,50 @@
+\newpage
+\subsubsection*{Άσκηση 2}
+
+Ο Αλγόριθμος θα παίρνει ως είσοδο ένα \en{puzzle}, τα όρια της περιοχής που μας ενδιαφέρει και την
+τοποθεσία του απαγορευτικού τετραγνώνου και θα γεμίζει την περιοχή με κατάλληλα κομμάτια.
+
+\selectlanguage{english}
+\begin{minted}{haskell}
+
+//checks if limits describe the base case
+isTwoByTwo :: Limits -> Bool
+
+//puts puzzle piece on given adjacent points
+fillPoints :: Puzzle -> (Point, Point, Point) -> Puzzle
+
+//splits limits to four quadrants
+splitToQuadrants :: Limits -> (Limits, Limits, Limits, Limits)
+
+//returns fake forbiddens for all quadtrants, first limits is 
+//given forbidden's quadrant. The forbiddens are adjacent.
+getMockForbiddens :: Point -> (Limits, Limits, Limits, Limits) 
+                           -> (Limits, (Limits,Point), (Limits,Point), (Limits,Point))
+
+fillPuzzle :: Puzzle -> Limits -> Point -> Puzzle
+fillPuzzle puzzle limits forbidden 
+    | isTwoByTwo limits = .. //base case
+    | otherwise = 
+        let
+          quadrants = splitToQuadrants limits forbidden
+          (limitsOfForbidden,
+            (limitsa, forbiddena), 
+            (limitsb, forbiddenb), 
+            (limitsc, forbiddenc)) = getMockForbiddens forbidden quadrants
+          filledOfForbbiden = fillPuzzle puzzle limitsOfForbidden forbidden
+          andFilledA = fillPuzzle filledOfForbbiden limitsa forbiddena
+          andFilledB = fillPuzzle andFilledA limitsb forbiddenb
+          andFilledC = fillPuzzle andFilledB limitsc forbiddenc
+        in
+          putPiece andFilledC (forbiddena, forbiddenb, forbiddenc)
+    
+\end{minted}
+\selectlanguage{greek}
+
+Για \en{puzzle} Μεγέθους $2\times2$ ο αλγόριθμος προφανώς δουλεύει.
+Αν δουλεύει για μεγέθους $2^i\times2^i$ ο αλγόριθμος θα δουλεύει για $2^{i+1}\times2^{i+1}$ αφού
+το \en{puzzle} σπάει σε 4 κομμάτια μεγέθους $2^i\times2^i$ τα οποία γεμίζονται αναδρομικά.
+Το κομμάτι που περιέχει το απαγορευμένο κομμάτι θα γεμίσει πλήρως εκτός απο αυτό,
+ενώ στα άλλα τρία κομμάτια βάζουμε ψεύτικα απαγορευτικά κομμάτια στην κοινή τους γωνία.
+Στο τέλος και τα άλλα τρία θα γεμίσουν πλήρως εκτός απο τα κομμάτια της κοινής τους γωνίας
+τα οποία μπορούμε και να γεμίσουμε με ένα κομμάτι του \en{puzzle}. 

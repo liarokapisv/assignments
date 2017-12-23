@@ -1,0 +1,62 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+					
+
+MVI A,0EH				
+					
+SIM
+LXI H,0000H
+MVI B,40H				
+LXI D,0000H				
+MVI C,00H				
+
+EI 					
+
+LOOP: NOP
+	CALL RST5.5\PYGZus{}ROUTINE
+	MOV A,B
+	
+	ANI A,01H
+	CMP 01H
+	JZ ODD
+EVEN: NOP					
+	MOV D,E				
+	CALL RST5.5\PYGZus{}ROUTINE
+	JMP CHECK\PYGZus{}COUNTER
+	
+ODD: NOP					
+	MOV A,E
+	RLC				
+	RLC
+	RLC
+	RLC
+	ORA D				
+	MOV E,A
+	MOV D,00H			
+	DAD D				
+
+CHECK\PYGZus{}COUNTER: NOP
+	
+	MOV A,B
+	CPI 0
+	JNZ LOOP
+
+	DI				
+
+AVERAGE: NOP
+	
+	DAD H				
+	DAD H
+HTL
+
+
+RST5.5\PYGZus{}ROUTINE: NOP
+
+	PUSH PSW
+	IN PORT\PYGZhy{}IN
+	MOV D,00H
+	MOV E,A
+	DCR B
+	POP PSW
+	EI
+	RET				
+\end{Verbatim}

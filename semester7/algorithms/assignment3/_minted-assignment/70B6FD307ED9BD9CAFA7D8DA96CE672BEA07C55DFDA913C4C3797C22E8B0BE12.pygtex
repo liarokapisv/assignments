@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{sortKeysLocks} \PYG{o+ow}{::} \PYG{p}{(}\PYG{k+kt}{Set} \PYG{k+kt}{Key}\PYG{p}{,} \PYG{k+kt}{Set} \PYG{k+kt}{Lock}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[(}\PYG{k+kt}{Key}\PYG{p}{,} \PYG{k+kt}{Lock}\PYG{p}{)]}
+\PYG{n+nf}{sortKeysLocks} \PYG{p}{(}\PYG{k+kt}{Empty}\PYG{p}{,} \PYG{k+kt}{Empty}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{[]}
+\PYG{n+nf}{sortKeysLocks} \PYG{k+kr}{data} \PYG{o+ow}{=}
+    \PYG{k+kr}{let}
+       \PYG{n}{pivot} \PYG{o+ow}{=} \PYG{n}{choosePivot} \PYG{k+kr}{data}
+       \PYG{n}{lessThanPivot} \PYG{o+ow}{=} \PYG{n}{keepSmaller} \PYG{n}{pivot} \PYG{k+kr}{data}
+       \PYG{n}{greaterThanPivot} \PYG{o+ow}{=} \PYG{n}{keepLarger} \PYG{n}{pivot} \PYG{k+kr}{data}
+    \PYG{k+kr}{in}
+       \PYG{n}{sortKeysLocks} \PYG{n}{lessThanPivot} \PYG{o}{++} \PYG{p}{[}\PYG{n}{pivot}\PYG{p}{]} \PYG{o}{++} \PYG{n}{sortKeysLocks} \PYG{n}{greaterThanPivot}
+
+\PYG{n+nf}{choosePivot} \PYG{o+ow}{::} \PYG{k+kt}{Set} \PYG{k+kt}{Key} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Set} \PYG{k+kt}{Lock} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{k+kt}{Key}\PYG{p}{,} \PYG{k+kt}{Lock}\PYG{p}{)}
+\PYG{n+nf}{keepSmaller} \PYG{o+ow}{::} \PYG{p}{(}\PYG{k+kt}{Key}\PYG{p}{,} \PYG{k+kt}{Lock}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{k+kt}{Set} \PYG{k+kt}{Key}\PYG{p}{,} \PYG{k+kt}{Set} \PYG{k+kt}{Lock}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{k+kt}{Set} \PYG{k+kt}{Key}\PYG{p}{,} \PYG{k+kt}{Set} \PYG{k+kt}{Lock}\PYG{p}{)}
+\PYG{n+nf}{keepLarger} \PYG{o+ow}{::} \PYG{p}{(}\PYG{k+kt}{Key}\PYG{p}{,} \PYG{k+kt}{Lock}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{k+kt}{Set} \PYG{k+kt}{Key}\PYG{p}{,} \PYG{k+kt}{Set} \PYG{k+kt}{Lock}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{k+kt}{Set} \PYG{k+kt}{Key}\PYG{p}{,} \PYG{k+kt}{Set} \PYG{k+kt}{Lock}\PYG{p}{)}
+\end{Verbatim}

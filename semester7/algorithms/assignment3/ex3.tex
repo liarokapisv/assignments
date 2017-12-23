@@ -1,0 +1,96 @@
+\newpage
+\subsubsection*{Άσκηση 3}
+
+Ο Αλγόριθμος θα παίρνει ως είσοδο ένα \en{sorted set} δορυφόρων με βάση ταξινόμησης την ενέργειά τους,
+ένα \en{sorted set} πλανητών με βάση ταξινόμησης την ασπίδα τους και θα βγάζει την αντιστοιχία τους.
+
+\selectlanguage{english}
+\begin{minted}{haskell}
+
+maximizeAssignment :: Int n -> SortedSet Satellite -> SortedSet Planet 
+                            -> Map Satellite Planet
+maximizeAssignment satellites planets = 
+    let
+        planetWithMaxValue = getMax planets
+        satelliteJustAboveShield = getJustAbove (shield planetWithMaxValue) satellite
+    in
+        case satelliteJustAboveShield of
+            Just satellite -> { satellite => planetWithMaxValue } U 
+                    maximizeAssignment (satellites - satellite) 
+                                       (planets - planetWithMaxValue)
+            Nothing -> let
+                           satelliteWithMinPower = getMin satellites
+                       in 
+                           maximizeAssignment (satellites - satelliteWithMinPower) 
+                                              (planets - planetWithMaxValue)
+\end{minted}
+\selectlanguage{greek}
+
+\hfill
+
+Έστω,
+
+\begin{equation*}\mathbb{P}: \text{σύνολο συνόλων πλανητών}\end{equation*}
+\begin{equation*}\mathbb{D}: \text{σύνολο συνόλων \en{death stars}}\end{equation*}
+\begin{equation*}(\forall P \in \mathbb{P}), v : P \Rightarrow \mathbb{Z} , \text{τιμή πλανήτη}\end{equation*} 
+\begin{equation*}(\forall P \in \mathbb{P}), s : P \Rightarrow \mathbb{Z} , \text{ασπίδα πλανήτη}\end{equation*}
+\begin{equation*}(\forall D \in \mathbb{D}), f : D \Rightarrow \mathbb{Z} , \text{δύναμη ακτίνας}\end{equation*}
+\begin{equation*} m : (\mathbb{P}, \mathbb{D}) \Rightarrow \mathbb{Z} , \text{συνολικό κέρδος αντιστοίχισης}\end{equation*}
+
+\hfill
+
+\begin{center}
+    Έστω $D \in \mathbb{D}, P \in \mathbb{P}$
+
+    Συμβολίζουμε $d_i \in D$ έτσι ώστε $ i < j \Rightarrow f(d_i) \le f(d_j) $
+
+\hfill
+
+    (Θεώρημα 1)
+
+    Προφανώς άμα πρέπει να χάσουμε απο τη διάθεση μας ένα \en{death star} θα βελτιστοποιήσουμε
+    το συνολικό κέρδος άμα χάσουμε το πιο αδύναμο. Άρα, 
+    \begin{equation*}\max\left\{m(P, D-d_i), i \in [a, b]\right\} = m(P, D-d_a)\end{equation*}
+
+
+\newpage
+
+    Έστω $p_{max} \in P :  v(p_{max}) = \max\{v(p), p \in P\}$
+
+\hfill
+
+    (Θεώρημα 2)
+
+    Έστω πως $\exists d_i : f(d_i) \ge s(p_{max})$ τότε ο $p_{max}$ πάντα είναι βέλτιστο να καταστραφεί απο κάποιο
+    \en{death star}. Διαφορετικά μπορούμε να ανταλλάξουμε τον πλανήτη που αντιστοιχείται με τον $d_i$ με τον $p_{max}$ και
+    να έχουμε καλύτερη αντιστοίχηση.
+
+\hfill
+
+    (Θεώρημα 3)
+
+    Έστω πως $ \nexists d_i : f(d_i) \ge s(p_{max})$ τότε ο $p_{max}$ δεν θα συνεισφέρει και θα έχουμε $m(P, D) = m(P-p_{max}, D-d_j)$ για κάποιο $d_j \in D$ που αντιστοιχείται με τον $p_{max}$.
+    Όμως απο το Θεώρημα 1 ξέρουμε πως για να μεγιστοποιηθεί το $m(P,D)$ τότε $d_j = d_{min}$ όπου $f(d_{min}) = \min\{f(d), d \in D\}$
+
+\hfill
+
+    (Θεώρημα 4)
+
+    Έστω πως $\exists d_i : f(d_i) \ge s(p_{max})$ τότε σύμφωνα με το Θεώρημα 2 θα πρέπει να αντιστοιχήσουμε στον $p_{max}$ ένα \en{death star} $d_j, j \in [a,b]$.
+    Έτσι θα εχουμε $m(P,D) = v(p_{max}) + m(P-p_{max}, D-d_j)$ το οποίο σύμφωνα με το Θεώρημα 1 μεγιστοποιείται για $d_j = d_a$.
+
+Σύμφωνα με τα Θεωρήματα 3 και 4 έχουμε
+    \begin{equation*}
+        m(P,D) = \left \{
+        \begin{array}{lr}
+            v(p_{max}) + m(P-p_{max}, D-d_m), & \exists d_m : m = \min\{i, f(d_i) \ge s(p_{max})\} \\
+            m(P-p_{max}, D-d_{min}), & \text{διαφορετικά} 
+        \end{array}
+        \right \} 
+    \end{equation*}
+
+Ο αλγόριθμος που παρατίθεται στην αρχή είναι μία απλή τροποποίηση της παραπάνω σχέσης έτσι ώστε να διατηρούνται οι αντιστοιχήσεις.
+Με τις κατάλληλες δομές (πχ \en{std::set}) όλες οι αναζητήσεις μπορούν
+να γίνουν σε $O(logn)$ χρόνο. Έτσι ο αλγόριθμος έχει πολυπλοκότητα $O(nlogn)$.
+\end{center}
+

@@ -1,0 +1,41 @@
+\newpage\subsection*{Άσκηση 1}
+
+Ένα αιτιακό ΓΧΑ σύστημα έχει συνάρτηση μεταφοράς 
+
+\begin{equation*} H(z) = \frac{(1-0.5z^{-1})(1+4z^{-2})}{(1-0.6z^{-2})} \end{equation*}
+
+\begin{enumerate}[(a)]
+\item
+Βρείτε εκφράσεις για ένα σύστημα ελάχιστης φάσης $H_1(z)$ και ένα \en{all-pass} σύστημα $H_{ap}(z)$ έτσι ώστε
+\begin{equation*} H(z) = H_1(z)H_{ap}(z) \end{equation*}
+
+\item
+Βρείτε εκφράσεις για ένα διαφορετικό σύστημα ελάχιστης φάσης $H_2(z)$ και ένα \en{FIR} σύστημα γενικευμένης γραμμικής φάσης $H_{lin}(z)$ έτσι ώστε
+\begin{equation*} H(z) = H_2(z)H_{lin}(z) \end{equation*}
+
+\end{enumerate}
+
+\subsubsection*{Λύση}
+
+\begin{enumerate}[(a)]
+
+\item
+\begin{align*}
+    H(z) &= \frac{(1-\frac12z^{-1})(1+4z^{-2})}{(1-0.64z^{-2})} \\
+         &= \frac{4(1-\frac12z^{-1})(z^{-2}+\frac12)}{(1-0.69z^{-2})} \\
+         &= \frac{4(1-\frac12z^{-1})(z^{-1}+\frac12j)(z^{-1}-\frac12j)}{(1-0.8z^{-1})(1+0.8z^{-1}j)} \\
+         &= \left(\frac{4(1-\frac12z^{-1})(1-\frac12z^{-1}j)(1+\frac12z^{-1}j)}{(1-0.8z^{-1})(1+0.8z^{-1})}\right)
+            \left(\frac{(z^{-1}-\frac12j)(z^{-1}+\frac12j)}{(1-\frac12z^{-1}j)(1+\frac12z^{-1}j)}\right) \\
+         &= H_1(z) H_{ap}(z)
+\end{align*}
+
+\item
+\begin{align*}
+    H(z) &= \frac{(1-\frac12z^{-1})(1+4z^{-2})}{(1-0.64z^{-2})} \\
+         &= \frac{(1-\frac12z^{-1})(1+4z^{-2})(4+z^{-2})}{(1-0.64z^{-2})(4+z^{-2})} \\
+         &= \frac{(1-\frac12z^{-1})(1+4z^{-2})(4+z^{-2})}{(1-0.8z^{-1})(1+0.8z^{-1})(4+z^{-2})} \\
+         &= \left(\frac{(1-\frac12z^{-1})}{(1-0.8z^{-1})(1+0.8z^{-1})(4+z^{-2})}\right) (4 + 17z^{-2} + 4z^{-4}) \\
+         &= H_2(z) H_{lin}(z)
+\end{align*}
+
+\end{enumerate}

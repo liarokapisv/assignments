@@ -1,0 +1,40 @@
+\newpage
+\subsubsection*{Άσκηση 1}
+
+Ο αλγόριθμος θα παίρνει ως είσοδο ένα ζεύγος συνόλων κλειδιών και κλειδαριων και θα
+δίνει ως έξοδο μία λίστα ζευγαριών κλειδιών-κλειδαριών αυξανόμενου μεγέθους.
+
+\selectlanguage{english}
+
+\begin{minted}{haskell}
+sortKeysLocks :: (Set Key, Set Lock) -> [(Key, Lock)]
+sortKeysLocks (Empty, Empty) = []
+sortKeysLocks data =
+    let
+       pivot = choosePivot data
+       lessThanPivot = keepSmaller pivot data
+       greaterThanPivot = keepLarger pivot data
+    in
+       sortKeysLocks lessThanPivot ++ [pivot] ++ sortKeysLocks greaterThanPivot
+
+choosePivot :: Set Key -> Set Lock -> (Key, Lock)
+keepSmaller :: (Key, Lock) -> (Set Key, Set Lock) -> (Set Key, Set Lock)
+keepLarger :: (Key, Lock) -> (Set Key, Set Lock) -> (Set Key, Set Lock)
+\end{minted}
+
+\selectlanguage{greek}
+
+Εξετάζοντας τον αλγόριθμο βλέπουμε πως έχει την ίδια μορφή με τον \en{quicksort}. Αρκεί να αποδείξουμε
+πως οι συναρτήσεις \en{choosePivot, keepSmaller} και \en{keepLarger} έχουν πολυπλοκότητα $O(n)$ και
+η ανάλυση θα ανάγεται στην ανάλυση του \en{quicksort} που έχει γνωστή πολυπλοκότητα $O(nlogn)$ στη μέση περίπτωση.
+
+Η \en{choosePivot} μπορεί να διαλέξει τυχαία ένα κλειδί και μετά να το δοκιμάσει σε κάθε κλειδαριά έτσι ώστε να βρεί την αντίστοιχη κλειδαριά.
+Έχει προφανώς πολυπλοκότητα $O(n)$.
+
+H \en{keepSmaller} φιλτράρει δύο φορές, μία φορά για τα κλειδιά και μία για τα λουκέτα. 
+Αυτο για τα κλειδιά το επιτυγχάνει βρίσκοντας ποια χωράνε στην \en{pivot} κλειδαριά, ενώ
+για τα λουκέτα δοκιμάζει σε ποια δε χωράει το \en{pivot} κλειδί. Η πολυπλοκότητα της παραπάνω διαδικασίας
+είναι $O(n)$ αφού χρειάζεται να διασχισει γραμμικά μία φορά κάθε σύνολο $n$ στοιχείων.
+
+H \en{keepLarger} λειτουργεί με τρόπο αντίστοιχο της \en{keepSmaller} και επομένως έχει επίσης
+πολυπλοκότητα $O(n)$.

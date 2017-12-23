@@ -1,0 +1,27 @@
+\newpage\subsection*{Άσκηση 2}
+
+Προβλήματα 3.4 απο βιβλίο, σελ 120-121.
+
+\subsubsection*{Λύση} 
+\begin{enumerate}[(a)]
+\item \begin{align*}
+    r_x(k) &= \left(\frac12\right)^{|k|} \Rightarrow \\
+R_x(e^{j\omega})  &=  \frac{1-\frac12^2}{1-cos\omega + \frac12^2} = \frac{1-\frac14}{1-\frac12(e^{j\omega} + e^{-j\omega}) + \frac14} \Rightarrow \\
+    R_x(z) &= \frac34 \frac{1}{(1 - \frac12(z+z^{-1}) + \frac14)} = \frac34 \frac{1}{(1-\frac12z)(1-\frac12z^{-1})}
+\end{align*}
+
+\item
+    \begin{equation*} \left(\frac13\right)^{|k|} \leftrightarrow \frac{\frac89}{(1-\frac13z^{-1})(1-\frac13z)} \Rightarrow \end{equation*}
+        \begin{equation*} r_y(k) = \frac89 \frac39 \left(\frac13\right)^{|k|} = \frac{27}{32} \left(\frac13\right)^{|k|} \end{equation*}
+
+\item
+\begin{equation*} Rxy(z) = R_x(z) H(z^{-1}) \end{equation*}
+
+\item
+    \begin{align*} R_{xy}(z) &=  \frac34 \frac{1}{(1-\frac12z)(1-\frac12z^{-1})} \frac{(1-\frac12z)}{(1-\frac13z)} \\
+                       &= \frac34 \frac{1}{(1-\frac13z)(1-\frac12z^{-1})} \\
+                       &= \frac34 \frac{z^{-1}}{(z^{-1}-\frac13)} \\
+                       &= \frac{9}{10} \frac{1}{1-\frac12z^{-1}} + \frac{3}{10}\frac{1}{z^{-1}-\frac13} \Rightarrow \\
+              r_{xy}(k) &= \frac{9}{10}\left(\frac12\right)^{k}u(k) + \frac{9}{10}3^{-k}u(-k-1)
+\end{align*}
+\end{enumerate}

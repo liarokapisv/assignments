@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{module} \PYG{n}{ex447} \PYG{p}{(}\PYG{n+no}{A}\PYG{p}{,}\PYG{n+no}{B}\PYG{p}{,}\PYG{n+no}{C}\PYG{p}{,}\PYG{n+no}{D}\PYG{p}{,} \PYG{n+no}{F1}\PYG{p}{,} \PYG{n+no}{F2}\PYG{p}{);}
+    \PYG{k}{input} \PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{,} \PYG{n+no}{D}\PYG{p}{;}
+    \PYG{k}{output} \PYG{n+no}{F1}\PYG{p}{,} \PYG{n+no}{F2}\PYG{p}{;}
+
+    \PYG{k}{assign} \PYG{n+no}{F1} \PYG{o}{=} \PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{n+no}{D}\PYG{p}{)}
+
+    \PYG{k}{assign} \PYG{n+no}{F2} \PYG{o}{=} \PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{o}{\PYGZti{}}\PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{n+no}{D}\PYG{p}{)} \PYG{o}{|}
+                \PYG{p}{(}\PYG{n+no}{A} \PYG{o}{\PYGZam{}} \PYG{n+no}{B} \PYG{o}{\PYGZam{}} \PYG{n+no}{C} \PYG{o}{\PYGZam{}} \PYG{n+no}{D}\PYG{p}{)}
+\PYG{k}{endmodule}
+\end{Verbatim}

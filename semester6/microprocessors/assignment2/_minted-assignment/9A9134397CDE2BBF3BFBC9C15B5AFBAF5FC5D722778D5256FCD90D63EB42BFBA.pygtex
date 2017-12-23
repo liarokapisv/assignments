@@ -1,0 +1,55 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{module} \PYG{n}{half\PYGZus{}adder}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{n+no}{S}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{);}
+    \PYG{k}{input} \PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{;}
+    \PYG{k}{output} \PYG{n+no}{S}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{;}
+
+    \PYG{k}{assign} \PYG{n+no}{S} \PYG{o}{=} \PYG{n}{x} \PYG{o}{\PYGZca{}} \PYG{n}{y}\PYG{p}{;}
+    \PYG{k}{assign} \PYG{n+no}{C} \PYG{o}{=} \PYG{n}{x} \PYG{o}{\PYGZam{}} \PYG{n}{y}\PYG{p}{;}
+\PYG{k}{endmodule}
+
+\PYG{k}{module} \PYG{n}{full\PYGZus{}adder}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{,}\PYG{n}{z}\PYG{p}{,}\PYG{n+no}{S}\PYG{p}{,}\PYG{n+no}{C}\PYG{p}{);}
+    \PYG{k}{input} \PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{n}{z}\PYG{p}{;}
+    \PYG{k}{output} \PYG{n+no}{S}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{;}
+    \PYG{k+kt}{wire} \PYG{n}{w1}\PYG{p}{,} \PYG{n}{w2}\PYG{p}{,} \PYG{n}{w3}\PYG{p}{;}
+
+    \PYG{n}{half\PYGZus{}adder} \PYG{n}{h1}\PYG{p}{(.}\PYG{n}{x}\PYG{p}{(}\PYG{n}{x}\PYG{p}{),} \PYG{p}{.}\PYG{n}{y}\PYG{p}{(}\PYG{n}{y}\PYG{p}{),} \PYG{p}{.}\PYG{n+no}{S}\PYG{p}{(}\PYG{n}{w1}\PYG{p}{),} \PYG{p}{.}\PYG{n+no}{C}\PYG{p}{(}\PYG{n}{w2}\PYG{p}{));}
+    \PYG{n}{half\PYGZus{}adder} \PYG{n}{h2}\PYG{p}{(.}\PYG{n}{x}\PYG{p}{(}\PYG{n}{w1}\PYG{p}{),} \PYG{p}{.}\PYG{n}{y}\PYG{p}{(}\PYG{n}{z}\PYG{p}{),} \PYG{p}{.}\PYG{n+no}{S}\PYG{p}{(}\PYG{n+no}{S}\PYG{p}{),} \PYG{p}{.}\PYG{n+no}{C}\PYG{p}{(}\PYG{n}{w3}\PYG{p}{));}
+    \PYG{k}{assign} \PYG{n+no}{C} \PYG{o}{=} \PYG{n}{w2} \PYG{o}{|} \PYG{n}{w3}\PYG{p}{;}
+\PYG{k}{endmodule}
+
+\PYG{k}{module} \PYG{n}{adder\PYGZus{}4bit}\PYG{p}{(}\PYG{n}{c}\PYG{p}{,} \PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{,} \PYG{n+no}{S}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{);}
+    \PYG{k}{input} \PYG{k+kt}{wire} \PYG{n}{c}\PYG{p}{;}
+    \PYG{k}{input} \PYG{k+kt}{wire} \PYG{p}{[}\PYG{l+m+mh}{3}\PYG{o}{:}\PYG{l+m+mh}{0}\PYG{p}{]} \PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{;}
+    \PYG{k}{output} \PYG{k+kt}{wire} \PYG{p}{[}\PYG{l+m+mh}{3}\PYG{o}{:}\PYG{l+m+mh}{0}\PYG{p}{]} \PYG{n+no}{S}\PYG{p}{;}
+    \PYG{k}{output} \PYG{k+kt}{wire} \PYG{n+no}{C}\PYG{p}{;}
+    \PYG{k+kt}{wire} \PYG{p}{[}\PYG{l+m+mh}{3}\PYG{o}{:}\PYG{l+m+mh}{0}\PYG{p}{]} \PYG{n}{Cs}\PYG{p}{;}
+
+    \PYG{n}{full\PYGZus{}adder} \PYG{n}{fa}\PYG{p}{(}\PYG{n+no}{A}\PYG{p}{[}\PYG{l+m+mh}{0}\PYG{p}{],} \PYG{n+no}{B}\PYG{p}{[}\PYG{l+m+mh}{0}\PYG{p}{],} \PYG{n}{c}\PYG{p}{,} \PYG{n+no}{S}\PYG{p}{[}\PYG{l+m+mh}{0}\PYG{p}{],} \PYG{n}{Cs}\PYG{p}{[}\PYG{l+m+mh}{0}\PYG{p}{]);}
+
+    \PYG{k}{genvar} \PYG{n}{i}\PYG{p}{;}
+    \PYG{k}{generate}
+    \PYG{k}{for} \PYG{p}{(}\PYG{n}{i} \PYG{o}{=} \PYG{l+m+mh}{1}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{l+m+mh}{4}\PYG{p}{;} \PYG{n}{i}\PYG{o}{=}\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mh}{1}\PYG{p}{)} \PYG{k}{begin}
+        \PYG{n}{full\PYGZus{}adder} \PYG{n}{fa}\PYG{p}{(}\PYG{n+no}{A}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n+no}{B}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n}{Cs}\PYG{p}{[}\PYG{n}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mh}{1}\PYG{p}{],} \PYG{n+no}{S}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n}{Cs}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]);}
+    \PYG{k}{end}
+    \PYG{k}{endgenerate}
+
+    \PYG{k}{assign} \PYG{n+no}{C} \PYG{o}{=} \PYG{n}{Cs}\PYG{p}{[}\PYG{l+m+mh}{3}\PYG{p}{];}
+\PYG{k}{endmodule}
+
+\PYG{k}{module} \PYG{n}{addsuber\PYGZus{}4bit}\PYG{p}{(}\PYG{n+no}{M}\PYG{p}{,} \PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{,} \PYG{n+no}{S}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{);}
+    \PYG{k}{input} \PYG{k+kt}{wire} \PYG{n+no}{M}\PYG{p}{;}
+    \PYG{k}{input} \PYG{k+kt}{wire} \PYG{p}{[}\PYG{l+m+mh}{3}\PYG{o}{:}\PYG{l+m+mh}{0}\PYG{p}{]} \PYG{n+no}{A}\PYG{p}{,} \PYG{n+no}{B}\PYG{p}{;}
+    \PYG{k}{output} \PYG{k+kt}{wire} \PYG{p}{[}\PYG{l+m+mh}{3}\PYG{o}{:}\PYG{l+m+mh}{0}\PYG{p}{]} \PYG{n+no}{S}\PYG{p}{;}
+    \PYG{k}{output} \PYG{k+kt}{wire} \PYG{n+no}{C}\PYG{p}{;}
+    \PYG{k+kt}{wire} \PYG{p}{[}\PYG{l+m+mh}{3}\PYG{o}{:}\PYG{l+m+mh}{0}\PYG{p}{]} \PYG{n}{Ws}\PYG{p}{;}
+
+    \PYG{k}{genvar} \PYG{n}{i}\PYG{p}{;}
+    \PYG{k}{generate}
+    \PYG{k}{for} \PYG{p}{(}\PYG{n}{i} \PYG{o}{=} \PYG{l+m+mh}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{l+m+mh}{4}\PYG{p}{;} \PYG{n}{i} \PYG{o}{=} \PYG{n}{i} \PYG{o}{+} \PYG{l+m+mh}{1}\PYG{p}{)} \PYG{k}{begin}
+        \PYG{k}{xor}\PYG{p}{(}\PYG{n}{Ws}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n+no}{B}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n+no}{M}\PYG{p}{);}
+    \PYG{k}{end}
+    \PYG{k}{endgenerate}
+
+    \PYG{n}{adder\PYGZus{}4bit} \PYG{n}{adder}\PYG{p}{(}\PYG{n+no}{M}\PYG{p}{,} \PYG{n+no}{A}\PYG{p}{,} \PYG{n}{Ws}\PYG{p}{,} \PYG{n+no}{S}\PYG{p}{,} \PYG{n+no}{C}\PYG{p}{);}
+\PYG{k}{endmodule}
+\end{Verbatim}
