@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+rents\PYGZus{}ending\PYGZus{}at\PYGZus{}[n] : each date is assigned all rents ending at that date O(m) construction
+dp[n] : the best gain for each date
+
+dp[0] = 0
+for date from 1 to n:
+   dp[date] = dp[date\PYGZhy{}1]
+   for every rent in rents\PYGZus{}ending\PYGZus{}at(date):
+        dp[date] = max(dp[date], dp[start\PYGZus{}date(rent)] + gain(rent))
+\end{Verbatim}

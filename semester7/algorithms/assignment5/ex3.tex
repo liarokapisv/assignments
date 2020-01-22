@@ -1,0 +1,22 @@
+\subsection*{Άσκηση 3}
+
+Μπορούμε να λύσουμε το πρόβλημα με τον παρακάτω ψευδοκώδικα:
+
+\selectlanguage{english}
+\begin{minted}{text}
+
+rents_ending_at_[n] : each date is assigned all rents ending at that date O(m) construction
+dp[n] : the best gain for each date
+
+dp[0] = 0
+for date from 1 to n:
+   dp[date] = dp[date-1]
+   for every rent in rents_ending_at(date):
+        dp[date] = max(dp[date], dp[start_date(rent)] + gain(rent))
+
+\end{minted}
+\selectlanguage{greek}
+        
+Ο εξωτερικός βρόγχος θα τρέξει $n$ φορές και ο εσωτερικός συνολικά $m$ φορές.
+Μαζί με την αρχικοποίηση του πίνακα τελικών ημερομηνιών ο αλγόριθμος έχει πολυπλοκότητα $O(n+m)$
+
